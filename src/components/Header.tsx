@@ -25,11 +25,6 @@ const Header = () => {
             {/* You can keep or remove the text logo depending on your preference */}
             {/*<span className="text-2xl font-bold text-[var(--primary)]">Safehaven</span>*/}
           </Link>
-
-
-
-
-
           
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center space-x-4">
@@ -66,12 +61,12 @@ const Header = () => {
         {isMenuOpen && (
           <nav className="md:hidden mt-4 pb-4">
             <div className="flex flex-col space-y-4">
-              <Link href="/readiness-institute" className="text-gray-700 hover:text-[var(--primary)] font-medium">Readiness Institute</Link>
-              <Link href="/challenge" className="text-gray-700 hover:text-[var(--primary)] font-medium">The Challenge</Link>
-              <Link href="/approach" className="text-gray-700 hover:text-[var(--primary)] font-medium">Our Approach</Link>
-              <Link href="/initiatives" className="text-gray-700 hover:text-[var(--primary)] font-medium">Initiatives</Link>
+              {/*<Link href="/readiness-institute" className="text-gray-700 hover:text-[var(--primary)] font-medium">Readiness Institute</Link>*/}
+              {/*<Link href="/challenge" className="text-gray-700 hover:text-[var(--primary)] font-medium">The Challenge</Link>*/}
+              {/*<Link href="/approach" className="text-gray-700 hover:text-[var(--primary)] font-medium">Our Approach</Link>*/}
               <Link href="/ai-townsquare" className="text-gray-700 hover:text-[var(--primary)] font-medium font-semibold">AI TownSquare</Link>
               <Link href="/readiness" className="text-gray-700 hover:text-[var(--primary)] font-medium">Societal Readiness Index</Link>
+                  <Link href="/initiatives" className="text-gray-700 hover:text-[var(--primary)] font-medium">Initiatives</Link>
               <Link href="/resources" className="text-gray-700 hover:text-[var(--primary)] font-medium">Resources</Link>
               <Link href="/join" className="btn-primary inline-block text-center">Get Involved</Link>
             </div>
