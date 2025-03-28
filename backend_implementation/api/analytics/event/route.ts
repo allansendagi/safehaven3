@@ -1,47 +1,90 @@
 import { NextResponse } from 'next/server';
 import { sql } from '@vercel/postgres';
+import { sendConfirmationEmail, sendNotificationEmail } from '../../lib/email'; // Adjusted import path
 
 export async function POST(request: Request) {
   try {
-    const { event_type, event_data, user_id, ip_address, user_agent } = await request.json();
+    const { firstName, lastName, email, organization, subject, message, newsletter } = await request.json();
 
-    // Validate input
-    if (!event_type) {
+    // Validate required fields
+    if (!firstName || !lastName || !email || !subject || !message) {
       return NextResponse.json(
-        { error: 'Event type is required' },
+        { error: 'Please fill in all required fields' },
         { status: 400 }
       );
     }
 
-    // Insert analytics event
-    const result = await sql`
-      INSERT INTO analytics_events (
-        event_type, 
-        event_data, 
-        user_id, 
-        ip_address, 
-        user_agent, 
-        created_at
+    // Validate email format
+    if (!/^\S+@\S+\.\S+$/.test(email)) {
+      return NextResponse.json(
+        { error: 'Please provide a valid email address' },
+        { status: 400 }
+      );
+    }
+
+    // Insert contact submission into the database
+    await sql`
+      INSERT INTO contact_submissions (
+        first_name, 
+        last_name, 
+        email, 
+        organization, 
+        subject, 
+        message, 
+        newsletter_opt_in,
+        submitted_at
       )
       VALUES (
-        ${event_type}, 
-        ${event_data ? JSON.stringify(event_data) : null}, 
-        ${user_id || null}, 
-        ${ip_address || null}, 
-        ${user_agent || null}, 
+        ${firstName}, 
+        ${lastName}, 
+        ${email}, 
+        ${organization || null}, 
+        ${subject}, 
+        ${message}, 
+        ${newsletter || false},
         NOW()
       )
-      RETURNING id
     `;
 
-    return NextResponse.json({
-      message: 'Analytics event recorded',
-      event_id: result.rows[0].id
-    });
-  } catch (error) {
-    console.error('Error recording analytics event:', error);
+    // Add to newsletter subscribers if opted in
+    if (newsletter) {
+      const existingSubscriber = await sql`
+        SELECT * FROM newsletter_subscribers WHERE email = ${email}
+      `;
+
+      if (existingSubscriber.rowCount === 0) {
+        await sql`
+          INSERT INTO newsletter_subscribers (email, subscribed_at)
+          VALUES (${email}, NOW())
+        `;
+      }
+    }
+
+    // Send confirmation email to the user
+    try {
+      await sendConfirmationEmail(email, 'contact', { firstName });
+    } catch (emailError) {
+      console.error('Failed to send confirmation email:', emailError);
+    }
+
+    // Send notification email to admin
+    try {
+      await sendNotificationEmail({
+        type: 'contact',
+        data: { firstName, lastName, email, organization, subject, message }
+      });
+    } catch (emailError) {
+      console.error('Failed to send notification email:', emailError);
+    }
+
     return NextResponse.json(
-      { error: 'An error occurred while recording the analytics event' },
+      { message: 'Your message has been submitted successfully' },
+      { status: 201 }
+    );
+  } catch (error) {
+    console.error('Contact form submission error:', error);
+    return NextResponse.json(
+      { error: 'An error occurred while processing your request' },
       { status: 500 }
     );
   }
