@@ -10,15 +10,9 @@
   },
   "dependencies": {
     "d3": "^7.8.5",
-<<<<<<< HEAD
     "next": "^13.5.11",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
-=======
-    "next": "^13.4.19",
-    "react": "^18",
-    "react-dom": "^18",
->>>>>>> 0eaded31ed8f17dfcf9472121e462c4b6764d97c
     "topojson-client": "^3.1.0"
   },
   "devDependencies": {
