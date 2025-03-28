@@ -1,14 +1,17 @@
 import { Resend } from 'resend';
 
 // Initialize Resend with API key (to be set in environment variables)
-const resend = new Resend(process.env.RESEND_API_KEY);
+const resend = new Resend(process.env.RESEND_API_KEY as string);
 
 // Admin email address to receive notifications
 const ADMIN_EMAIL = process.env.ADMIN_EMAIL || 'info@safehaven.org';
 const FROM_EMAIL = process.env.FROM_EMAIL || 'no-reply@safehaven.org';
 
 /**
- * Send confirmation email to users after form submission
+ * Send confirmation email to users after form submission.
+ * @param email - Recipient email address.
+ * @param type - Email type: 'newsletter' or 'contact'.
+ * @param data - Optional additional data (e.g. firstName).
  */
 export async function sendConfirmationEmail(
   email: string, 
@@ -34,7 +37,7 @@ export async function sendConfirmationEmail(
     `;
   } else if (type === 'contact') {
     const firstName = data?.firstName || 'there';
-    subject = 'We\'ve received your message - SafeHaven';
+    subject = "We've received your message - SafeHaven";
     html = `
       <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
         <h2 style="color: #3B82F6;">Thank you for contacting us!</h2>
@@ -68,7 +71,8 @@ export async function sendConfirmationEmail(
 }
 
 /**
- * Send notification email to administrators
+ * Send notification email to administrators.
+ * @param params - An object containing the type of email and the data to include.
  */
 export async function sendNotificationEmail({
   type,
