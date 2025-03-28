@@ -311,8 +311,8 @@ const BookPage = () => {
                 </div>
                 
                 <p className="text-sm text-gray-600 text-center">
-                {/*  By submitting this form, you'll be notified when the book is available for purchase. 
-                  No payment is required at this time.*/}
+                  By submitting this form, you'll be notified when the book is available for purchase. 
+                  No payment is required at this time.
                 </p>
               </form>
             )}
