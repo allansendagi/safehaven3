@@ -13,7 +13,7 @@ const SelfCorrectionVisualization = () => {
     d3.select(svgRef.current).selectAll('*').remove();
     
     const width = svgRef.current.clientWidth;
-    const height = 400; // Increased height for better visualization
+    const height = 400; // Reduced height for better fit
     
     // Create SVG
     const svg = d3.select(svgRef.current)
@@ -22,18 +22,49 @@ const SelfCorrectionVisualization = () => {
     
     // Define the center point and radius for the circular flow
     const centerX = width / 2;
-    const centerY = height / 2;
-    const radius = Math.min(width, height) / 3.5;
+    const centerY = height / 2 - 30; // Moved upward by 30px
+    const radius = Math.min(width, height) / 3.2;
     
     // Create a group for the visualization
     const vizGroup = svg.append('g')
       .attr('transform', `translate(${centerX}, ${centerY})`);
     
+    // Add a subtle background circle for the entire framework
+    vizGroup.append('circle')
+      .attr('r', radius + 60)
+      .attr('fill', '#f8fafc')
+      .attr('stroke', '#e2e8f0')
+      .attr('stroke-width', 1);
+    
     // Define the three stages of the self-correction process
     const stages = [
-      { id: 'diagnosis', name: 'Diagnosis', description: 'SRI flags weak points', color: '#3B82F6', icon: 'M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2', pillar: 'SRI' },
-      { id: 'intervention', name: 'Intervention', description: 'Targeted programs & policies', color: '#10B981', icon: 'M11 4a2 2 0 114 0v1a1 1 0 001 1h3a1 1 0 011 1v3a1 1 0 01-1 1h-1a2 2 0 100 4h1a1 1 0 011 1v3a1 1 0 01-1 1h-3a1 1 0 01-1-1v-1a2 2 0 10-4 0v1a1 1 0 01-1 1H7a1 1 0 01-1-1v-3a1 1 0 00-1-1H4a2 2 0 110-4h1a1 1 0 001-1V7a1 1 0 011-1h3a1 1 0 001-1V4', pillar: 'AI TownSquare' },
-      { id: 'remeasurement', name: 'Re-measurement', description: 'Recalculate SRI scores', color: '#EC4899', icon: 'M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15', pillar: 'Readiness Institute' }
+      { 
+        id: 'diagnosis', 
+        name: 'Diagnosis', 
+        description: 'SRI flags weak points', 
+        color: '#3B82F6', 
+        icon: 'M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2', 
+        pillar: 'SRI',
+        iconScale: 1.3
+      },
+      { 
+        id: 'intervention', 
+        name: 'Intervention', 
+        description: 'Targeted programs & policies', 
+        color: '#10B981', 
+        icon: 'M11 4a2 2 0 114 0v1a1 1 0 001 1h3a1 1 0 011 1v3a1 1 0 01-1 1h-1a2 2 0 100 4h1a1 1 0 011 1v3a1 1 0 01-1 1h-3a1 1 0 01-1-1v-1a2 2 0 10-4 0v1a1 1 0 01-1 1H7a1 1 0 01-1-1v-3a1 1 0 00-1-1H4a2 2 0 110-4h1a1 1 0 001-1V7a1 1 0 011-1h3a1 1 0 001-1V4', 
+        pillar: 'AI TownSquare',
+        iconScale: 1.1
+      },
+      { 
+        id: 'remeasurement', 
+        name: 'Re-measurement', 
+        description: 'Recalculate SRI scores', 
+        color: '#EC4899', 
+        icon: 'M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15', 
+        pillar: 'Readiness Institute',
+        iconScale: 1.3
+      }
     ];
     
     // Calculate positions for each stage (equally spaced around a circle)
@@ -45,21 +76,24 @@ const SelfCorrectionVisualization = () => {
     });
     
     // Draw connecting arrows between stages (circular flow)
-    const arrowPath = d3.path();
-    arrowPath.arc(0, 0, radius, 0, 2 * Math.PI);
-    
-    vizGroup.append('path')
-      .attr('d', arrowPath.toString())
-      .attr('fill', 'none')
-      .attr('stroke', '#CBD5E1')
-      .attr('stroke-width', 2)
-      .attr('stroke-dasharray', '5,5');
-    
-    // Add arrowheads to the circular path
+    // Create separate arcs for each segment to avoid criss-crossing
     stages.forEach((stage, i) => {
       const nextIndex = (i + 1) % stages.length;
       const currentAngle = i * angleStep - Math.PI / 2;
       const nextAngle = nextIndex * angleStep - Math.PI / 2;
+      
+      // Create an arc path for this segment
+      const arcPath = d3.path();
+      arcPath.arc(0, 0, radius, currentAngle, nextAngle);
+      
+      // Draw the arc with the stage's color and make it more visible
+      vizGroup.append('path')
+        .attr('d', arcPath.toString())
+        .attr('fill', 'none')
+        .attr('stroke', stage.color)
+        .attr('stroke-width', 2.5)
+        .attr('stroke-opacity', 0.6)
+        .attr('stroke-dasharray', '6,3');
       
       // Calculate a point along the arc for the arrowhead
       const midAngle = (currentAngle + nextAngle) / 2;
@@ -69,11 +103,11 @@ const SelfCorrectionVisualization = () => {
       // Calculate the angle for the arrowhead
       const arrowAngle = midAngle + Math.PI / 2;
       
-      // Draw the arrowhead
+      // Draw the arrowhead with the stage's color
       vizGroup.append('polygon')
-        .attr('points', '0,-5 5,5 -5,5')
+        .attr('points', '0,-6 6,6 -6,6')
         .attr('transform', `translate(${arrowX}, ${arrowY}) rotate(${arrowAngle * 180 / Math.PI})`)
-        .attr('fill', '#64748B');
+        .attr('fill', stage.color);
     });
     
     // Create stage nodes
@@ -84,64 +118,77 @@ const SelfCorrectionVisualization = () => {
       .attr('class', 'stage')
       .attr('transform', d => `translate(${d['x']}, ${d['y']})`);
     
-    // Add circular backgrounds for each stage
+    // Add circular backgrounds for each stage with a subtle glow effect
     stageGroups.append('circle')
-      .attr('r', 40)
+      .attr('r', 45)
       .attr('fill', 'white')
       .attr('stroke', d => d.color)
       .attr('stroke-width', 3);
     
-    // Add icons to each stage
+    // Add a subtle shadow/glow effect
+    stageGroups.append('circle')
+      .attr('r', 45)
+      .attr('fill', d => d.color)
+      .attr('opacity', 0.1);
+    
+    // Add icons to each stage - properly centered
     stageGroups.append('svg')
-      .attr('width', 30)
-      .attr('height', 30)
-      .attr('x', -15)
-      .attr('y', -15)
+      .attr('width', d => 30 * d.iconScale)
+      .attr('height', d => 30 * d.iconScale)
+      .attr('x', d => -15 * d.iconScale)
+      .attr('y', d => -15 * d.iconScale)
       .append('path')
       .attr('d', d => d.icon)
       .attr('fill', 'none')
       .attr('stroke', d => d.color)
-      .attr('stroke-width', 2)
+      .attr('stroke-width', 2.5)
       .attr('stroke-linecap', 'round')
       .attr('stroke-linejoin', 'round');
     
-    // Add stage names
+    // Add stage names with larger, more visible text
     stageGroups.append('text')
-      .attr('y', 50)
+      .attr('y', 60)
       .attr('text-anchor', 'middle')
       .attr('font-weight', 'bold')
       .attr('font-size', '14px')
       .attr('fill', d => d.color)
       .text(d => d.name);
     
-    // Add pillar names
+    // Add pillar names with larger text
     stageGroups.append('text')
-      .attr('y', 68)
+      .attr('y', 75)
       .attr('text-anchor', 'middle')
       .attr('font-weight', 'bold')
       .attr('font-size', '12px')
       .attr('fill', d => d.color)
       .text(d => d.pillar);
     
-    // Add stage descriptions
+    // Add stage descriptions with larger text
     stageGroups.append('text')
-      .attr('y', 86)
+      .attr('y', 90)
       .attr('text-anchor', 'middle')
       .attr('font-size', '10px')
       .attr('fill', '#64748B')
       .text(d => d.description);
     
     // Add central element representing the self-correcting framework
+    // Create a more prominent central element
     vizGroup.append('circle')
-      .attr('r', 50)
+      .attr('r', 55)
       .attr('fill', 'white')
       .attr('stroke', '#1E40AF')
-      .attr('stroke-width', 2);
+      .attr('stroke-width', 3);
+    
+    // Add a subtle glow effect
+    vizGroup.append('circle')
+      .attr('r', 55)
+      .attr('fill', '#1E40AF')
+      .attr('opacity', 0.1);
     
     vizGroup.append('text')
       .attr('text-anchor', 'middle')
       .attr('font-weight', 'bold')
-      .attr('font-size', '14px')
+      .attr('font-size', '12px')
       .attr('fill', '#1E40AF')
       .attr('y', -15)
       .text('Self-Correcting');
@@ -149,92 +196,105 @@ const SelfCorrectionVisualization = () => {
     vizGroup.append('text')
       .attr('text-anchor', 'middle')
       .attr('font-weight', 'bold')
-      .attr('font-size', '14px')
+      .attr('font-size', '12px')
       .attr('fill', '#1E40AF')
-      .attr('y', 5)
+      .attr('y', 8)
       .text('Framework');
     
     vizGroup.append('text')
       .attr('text-anchor', 'middle')
-      .attr('font-size', '10px')
+      .attr('font-size', '12px')
       .attr('fill', '#64748B')
-      .attr('y', 25)
+      .attr('y', 28)
       .text('Closing the readiness gap');
     
-    // Add the case study example
+    // Add the case study example with improved visibility - moved to top right
     const caseStudyGroup = svg.append('g')
-      .attr('transform', `translate(${width - 180}, ${height - 140})`);
+      .attr('transform', `translate(${width - 190}, 20)`);
     
+    // Add a more prominent case study box with a subtle shadow
     caseStudyGroup.append('rect')
-      .attr('width', 170)
+      .attr('width', 180)
       .attr('height', 130)
-      .attr('rx', 5)
-      .attr('ry', 5)
-      .attr('fill', '#F8FAFC')
+      .attr('rx', 8)
+      .attr('ry', 8)
+      .attr('fill', 'white')
       .attr('stroke', '#CBD5E1')
-      .attr('stroke-width', 1);
+      .attr('stroke-width', 1.5)
+      .attr('filter', 'drop-shadow(0px 3px 4px rgba(0, 0, 0, 0.1))');
     
     caseStudyGroup.append('text')
-      .attr('x', 85)
+      .attr('x', 90)
       .attr('y', 20)
       .attr('text-anchor', 'middle')
       .attr('font-weight', 'bold')
-      .attr('font-size', '12px')
+      .attr('font-size', '14px')
       .attr('fill', '#1E40AF')
       .text('Case Study: City Implementation');
     
-    // Diagnosis section
+    // Diagnosis section with larger text
     caseStudyGroup.append('text')
-      .attr('x', 10)
+      .attr('x', 12)
       .attr('y', 40)
       .attr('font-weight', 'bold')
-      .attr('font-size', '10px')
+      .attr('font-size', '12px')
       .attr('fill', '#3B82F6')
       .text('Diagnosis:');
     
     caseStudyGroup.append('text')
-      .attr('x', 10)
+      .attr('x', 12)
       .attr('y', 55)
-      .attr('font-size', '9px')
+      .attr('font-size', '11px')
       .attr('fill', '#64748B')
       .text('SRI flags "Citizen Empowerment" and');
     
     caseStudyGroup.append('text')
-      .attr('x', 10)
-      .attr('y', 65)
-      .attr('font-size', '9px')
+      .attr('x', 12)
+      .attr('y', 70)
+      .attr('font-size', '11px')
       .attr('fill', '#64748B')
       .text('"Economic Adaptability" as weak points');
     
-    // Intervention section
+    // Intervention section with larger text
     caseStudyGroup.append('text')
-      .attr('x', 10)
-      .attr('y', 80)
+      .attr('x', 12)
+      .attr('y', 90)
       .attr('font-weight', 'bold')
-      .attr('font-size', '10px')
+      .attr('font-size', '12px')
       .attr('fill', '#10B981')
       .text('Intervention:');
     
     caseStudyGroup.append('text')
-      .attr('x', 10)
-      .attr('y', 95)
-      .attr('font-size', '9px')
+      .attr('x', 12)
+      .attr('y', 105)
+      .attr('font-size', '11px')
       .attr('fill', '#64748B')
       .text('AI TownSquare training programs and');
     
     caseStudyGroup.append('text')
-      .attr('x', 10)
-      .attr('y', 105)
-      .attr('font-size', '9px')
+      .attr('x', 12)
+      .attr('y', 120)
+      .attr('font-size', '11px')
       .attr('fill', '#64748B')
       .text('Readiness Institute literacy materials');
     
-    // Results section
+    // Results section with larger text
+    caseStudyGroup.append('rect')
+      .attr('x', 0)
+      .attr('y', 130)
+      .attr('width', 180)
+      .attr('height', 25)
+      .attr('fill', '#EC4899')
+      .attr('opacity', 0.1)
+      .attr('rx', 0)
+      .attr('ry', 0);
+    
     caseStudyGroup.append('text')
-      .attr('x', 10)
-      .attr('y', 120)
+      .attr('x', 90)
+      .attr('y', 147)
+      .attr('text-anchor', 'middle')
       .attr('font-weight', 'bold')
-      .attr('font-size', '10px')
+      .attr('font-size', '12px')
       .attr('fill', '#EC4899')
       .text('Result: SRI Score +16 points in 6 months');
     
@@ -252,11 +312,11 @@ const SelfCorrectionVisualization = () => {
       // Update center point
       const newCenterX = newWidth / 2;
       
-      // Update visualization group position
-      vizGroup.attr('transform', `translate(${newCenterX}, ${centerY})`);
+      // Update visualization group position - maintain the upward shift
+      vizGroup.attr('transform', `translate(${newCenterX}, ${newHeight / 2 - 30})`);
       
-      // Update case study position
-      caseStudyGroup.attr('transform', `translate(${newWidth - 180}, ${newHeight - 140})`);
+      // Update case study position - now at top right
+      caseStudyGroup.attr('transform', `translate(${newWidth - 190}, 20)`);
     };
     
     window.addEventListener('resize', resizeVisualization);
@@ -269,7 +329,7 @@ const SelfCorrectionVisualization = () => {
   return (
     <div className="w-full h-full">
       <svg ref={svgRef} className="w-full h-full"></svg>
-      <div className="mt-4 text-xs text-gray-600 text-center">
+      <div className="mt-4 text-sm text-gray-700 text-center font-medium">
         <p>The self-correcting framework ensures that as AI evolves, society adapts—closing the readiness gap one pillar at a time.</p>
       </div>
     </div>

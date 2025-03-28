@@ -35,6 +35,8 @@ const Header = () => {
             <Link href="/readiness-institute" className="text-gray-700 hover:text-[var(--primary)] font-semibold">Readiness Institute</Link>
             <Link href="/initiatives" className="text-gray-700 hover:text-[var(--primary)] font-semibold">Initiatives</Link>
             <Link href="/resources" className="text-gray-700 hover:text-[var(--primary)] font-semibold">Resources</Link>
+            <Link href="/book" className="text-gray-700 hover:text-[var(--primary)] font-semibold">Get the Book</Link>
+
           </nav>
           
           {/* CTA Button */}
@@ -66,7 +68,8 @@ const Header = () => {
               {/*<Link href="/approach" className="text-gray-700 hover:text-[var(--primary)] font-medium">Our Approach</Link>*/}
               <Link href="/ai-townsquare" className="text-gray-700 hover:text-[var(--primary)] font-medium font-semibold">AI TownSquare</Link>
               <Link href="/readiness" className="text-gray-700 hover:text-[var(--primary)] font-medium">Societal Readiness Index</Link>
-                  <Link href="/initiatives" className="text-gray-700 hover:text-[var(--primary)] font-medium">Initiatives</Link>
+              <Link href="/initiatives" className="text-gray-700 hover:text-[var(--primary)] font-medium">Initiatives</Link>
+              <Link href="/book" className="text-gray-700 hover:text-[var(--primary)] font-medium">The Book</Link>
               <Link href="/resources" className="text-gray-700 hover:text-[var(--primary)] font-medium">Resources</Link>
               <Link href="/join" className="btn-primary inline-block text-center">Get Involved</Link>
             </div>
