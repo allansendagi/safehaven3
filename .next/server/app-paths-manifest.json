@@ -1,16 +1,3 @@
 {
-  "/_not-found": "app/_not-found.js",
-  "/book/page": "app/book/page.js",
-  "/challenge/page": "app/challenge/page.js",
-  "/initiatives/page": "app/initiatives/page.js",
-  "/join/page": "app/join/page.js",
-  "/page": "app/page.js",
-  "/ai-townsquare/page": "app/ai-townsquare/page.js",
-  "/book-preorder/route": "app/book-preorder/route.js",
-  "/product-roadmap/page": "app/product-roadmap/page.js",
-  "/readiness/white-paper/page": "app/readiness/white-paper/page.js",
-  "/readiness-institute/page": "app/readiness-institute/page.js",
-  "/readiness/page": "app/readiness/page.js",
-  "/approach/page": "app/approach/page.js",
-  "/resources/page": "app/resources/page.js"
+  "/api/init-db/route": "app/api/init-db/route.js"
 }

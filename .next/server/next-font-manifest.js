@@ -1,1 +1,1 @@
-self.__NEXT_FONT_MANIFEST='{"pages":{},"app":{"/Users/AllanSendagi/Downloads/fixed_project/src/app/layout":["static/media/4f05ba3a6752a328-s.p.woff2","static/media/3d9ea938b6afa941-s.p.woff2","static/media/12d86e8d7e1c2769-s.p.woff2"]},"appUsingSizeAdjust":true,"pagesUsingSizeAdjust":false}';
+self.__NEXT_FONT_MANIFEST="{\"pages\":{},\"app\":{},\"appUsingSizeAdjust\":false,\"pagesUsingSizeAdjust\":false}"
