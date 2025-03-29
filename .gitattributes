@@ -1,3 +1,4 @@
 *.node filter=lfs diff=lfs merge=lfs -text
 node_modules/**/*.node filter=lfs diff=lfs merge=lfs -text
 node_modules/@next/swc-darwin-x64/next-swc.darwin-x64.node filter=lfs diff=lfs merge=lfs -text
+node_modules/@next/swc-*/next-swc.*.node filter=lfs diff=lfs merge=lfs -text

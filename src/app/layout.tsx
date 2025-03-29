@@ -3,8 +3,15 @@ import { Inter, Montserrat, Open_Sans, Roboto_Mono } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import localFont from '@next/font/local';
+
 
 // Font configurations
+
+const robotoMono = localFont({
+  src: '../public/fonts/RobotoMono-VariableFont_wght.ttf',
+  display: 'swap',
+});
 const montserrat = Montserrat({ 
   subsets: ["latin"],
   display: "swap",
