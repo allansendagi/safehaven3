@@ -5,6 +5,11 @@ const nextConfig = {
   images: {
     domains: ['cdn.jsdelivr.net'],
   },
+  experimental: {
+    esmExternals: 'loose',
+    // This helps Next.js resolve module imports more flexibly
+    transpilePackages: [],
+  },
 };
 
 module.exports = nextConfig;

@@ -1,12 +1,17 @@
 import type { Metadata } from "next";
-import { Inter, Montserrat, Open_Sans, Roboto_Mono } from "next/font/google";
+import { Inter, Montserrat, Open_Sans} from "next/font/google";
 import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import localFont from '@next/font/local';
+import { Inter } from 'next/font/google';
+
 
 
 // Font configurations
+
+const inter = Inter({ subsets: ['latin'] });
+
 
 const robotoMono = localFont({
   src: '../public/fonts/RobotoMono-VariableFont_wght.ttf',
@@ -26,12 +31,12 @@ const openSans = Open_Sans({
   weight: ["400", "500", "600"]
 });
 
-const robotoMono = Roboto_Mono({ 
-  subsets: ["latin"],
-  display: "swap",
-  variable: "--font-roboto-mono",
-  weight: ["400"]
-});
+// const robotoMono = Roboto_Mono({ 
+//   subsets: ["latin"],
+//   display: "swap",
+//   variable: "--font-roboto-mono",
+//   weight: ["400"]
+// });
 
 export const metadata: Metadata = {
   title: "Safehaven - Preparing Civilization for AI and Superintelligence",
@@ -45,7 +50,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${montserrat.variable} ${openSans.variable} ${robotoMono.variable}`}>
+    <html lang="en" className={`${montserrat.variable} ${openSans.variable} ${inter.variable}`}>
       <body className={openSans.className}>
         <Header />
         {children}
