@@ -1,5 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  transpilePackages: [],
   reactStrictMode: true,
   swcMinify: true,
   images: {
@@ -8,8 +9,9 @@ const nextConfig = {
   experimental: {
     esmExternals: 'loose',
     // This helps Next.js resolve module imports more flexibly
-    transpilePackages: [],
+  
   },
 };
 
 module.exports = nextConfig;
+

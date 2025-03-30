@@ -4,8 +4,6 @@ import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import localFont from '@next/font/local';
-import { Inter } from 'next/font/google';
-
 
 
 // Font configurations
@@ -13,10 +11,10 @@ import { Inter } from 'next/font/google';
 const inter = Inter({ subsets: ['latin'] });
 
 
-const robotoMono = localFont({
-  src: '../public/fonts/RobotoMono-VariableFont_wght.ttf',
-  display: 'swap',
-});
+// const robotoMono = localFont({
+//   src: '../public/fonts/RobotoMono-VariableFont_wght.ttf',
+//   display: 'swap',
+// });
 const montserrat = Montserrat({ 
   subsets: ["latin"],
   display: "swap",
