@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import { sql } from '@vercel/postgres';
-import { sendConfirmationEmail, sendNotificationEmail } from '@lib/email';
+import { sendConfirmationEmail, sendNotificationEmail } from '@/lib/email';
+
 
 export async function POST(request: Request) {
   try {
@@ -14,7 +15,7 @@ export async function POST(request: Request) {
       );
     }
 
-    // Validate email format
+    // Validate email
     if (!/^\S+@\S+\.\S+$/.test(email)) {
       return NextResponse.json(
         { error: 'Please provide a valid email address' },
@@ -22,7 +23,7 @@ export async function POST(request: Request) {
       );
     }
 
-    // Insert contact submission into the database
+    // Insert contact submission
     await sql`
       INSERT INTO contact_submissions (
         first_name, 
@@ -46,7 +47,7 @@ export async function POST(request: Request) {
       )
     `;
 
-    // Add to newsletter subscribers if opted in
+    // If user opted in for newsletter, add to newsletter subscribers
     if (newsletter) {
       const existingSubscriber = await sql`
         SELECT * FROM newsletter_subscribers WHERE email = ${email}
@@ -60,11 +61,12 @@ export async function POST(request: Request) {
       }
     }
 
-    // Send confirmation email to the user
+    // Send confirmation email to user
     try {
       await sendConfirmationEmail(email, 'contact', { firstName });
     } catch (emailError) {
       console.error('Failed to send confirmation email:', emailError);
+      // Continue with the submission process even if email fails
     }
 
     // Send notification email to admin
@@ -75,6 +77,7 @@ export async function POST(request: Request) {
       });
     } catch (emailError) {
       console.error('Failed to send notification email:', emailError);
+      // Continue with the submission process even if email fails
     }
 
     return NextResponse.json(
