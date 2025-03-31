@@ -8,10 +8,11 @@ const nextConfig = {
   },
   experimental: {
     esmExternals: 'loose',
+    serverComponentsExternalPackages: ["@vercel/postgres"]
+
     // This helps Next.js resolve module imports more flexibly
   
   },
 };
 
 module.exports = nextConfig;
-

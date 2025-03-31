@@ -1,7 +1,6 @@
 import { NextResponse } from 'next/server';
 import { sql } from '@vercel/postgres';
-
-import { sendConfirmationEmail } from '@/lib/email';
+import { sendConfirmationEmail } from '@/lib/email'; // Fixed import path
 
 export async function POST(request: Request) {
   try {

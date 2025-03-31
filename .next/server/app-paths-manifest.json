@@ -1,4 +1,19 @@
 {
+  "/_not-found": "app/_not-found.js",
+  "/api/init-db/route": "app/api/init-db/route.js",
+  "/api/resources/route": "app/api/resources/route.js",
+  "/approach/page": "app/approach/page.js",
+  "/book/page": "app/book/page.js",
+  "/ai-townsquare/page": "app/ai-townsquare/page.js",
+  "/initiatives/page": "app/initiatives/page.js",
+  "/challenge/page": "app/challenge/page.js",
   "/join/page": "app/join/page.js",
-  "/page": "app/page.js"
+  "/page": "app/page.js",
+  "/api/newsletter/route": "app/api/newsletter/route.js",
+  "/book-preorder/route": "app/book-preorder/route.js",
+  "/readiness-institute/page": "app/readiness-institute/page.js",
+  "/readiness/white-paper/page": "app/readiness/white-paper/page.js",
+  "/resources/page": "app/resources/page.js",
+  "/readiness/page": "app/readiness/page.js",
+  "/product-roadmap/page": "app/product-roadmap/page.js"
 }

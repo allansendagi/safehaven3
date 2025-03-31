@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 import { sql } from '@vercel/postgres';
-import { sendConfirmationEmail } from '../../lib/email'; // Fixed import path
+import { sendConfirmationEmail } from '@lib/email'; // Fixed import path
 
 export async function POST(request: Request) {
   try {
@@ -52,3 +52,4 @@ export async function POST(request: Request) {
     );
   }
 }
+import { testFunction } from '@/lib/test';
