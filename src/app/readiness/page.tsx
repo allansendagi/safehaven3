@@ -18,7 +18,7 @@ export default function ReadinessPage() {
           
           <div className="flex flex-wrap justify-center gap-4">
             <Link href="/readiness/white-paper" className="btn-primary">
-              Read the Whitepaper
+              Read the Manifesto
             </Link>
             <a href="/documents/White Paper - Towards Societal Readiness.pdf" download className="btn-outline">
               Download PDF

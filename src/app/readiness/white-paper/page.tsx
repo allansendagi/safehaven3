@@ -12,7 +12,7 @@ export default function WhitePaperPage() {
           </h1>
           
           <p className="text-xl text-gray-700 mb-12 text-center animate-fade-in">
-            A comprehensive white paper on preparing civilization for the advent of AI and superintelligence
+            The manifesto on preparing civilization for the advent of AI and superintelligence
           </p>
           
           <div className="bg-[var(--primary)] bg-opacity-5 rounded-lg p-8 mb-12 border border-[var(--primary)] border-opacity-20 animate-slide-up">
@@ -34,10 +34,10 @@ export default function WhitePaperPage() {
               <div className="w-full md:w-2/3">
                 <h3 className="text-2xl font-bold text-[var(--primary)] mb-4">Executive Summary</h3>
                 <p className="text-gray-700 mb-4">
-                  This white paper presents a framework for assessing and enhancing societal readiness for advanced artificial intelligence and potential superintelligence. It outlines the challenges of exponential AI growth against linear societal adaptation and proposes structured approaches to bridge this gap.
+                  This manifesto presents a framework for assessing and enhancing societal readiness for advanced artificial intelligence and potential superintelligence. It outlines the challenges of exponential AI growth against linear societal adaptation and proposes structured approaches to bridge this gap.
                 </p>
                 <p className="text-gray-700 mb-6">
-                  The Societal Readiness Index (SRI) introduced in this paper provides a quantifiable metric for measuring preparedness across governance, technical literacy, ethical frameworks, infrastructure, and social adaptation dimensions.
+                  The Societal Readiness Index (SRI) introduced here provides a quantifiable metric for measuring preparedness across governance, technical literacy, ethical frameworks, infrastructure, and social adaptation dimensions.
                 </p>
                 <div className="flex flex-col sm:flex-row gap-4">
                   <a 
@@ -65,7 +65,7 @@ export default function WhitePaperPage() {
                 As artificial intelligence capabilities advance at an exponential rate, societies worldwide face unprecedented challenges in adaptation and governance. The gap between technological development and societal readiness threatens to create instability, inequality, and potential existential risks.
               </p>
               <p className="text-gray-700">
-                This white paper introduces a comprehensive framework for assessing and enhancing societal readiness for advanced AI systems, with particular focus on the potential emergence of artificial general intelligence (AGI) and superintelligence.
+                This manifesto introduces a comprehensive framework for assessing and enhancing societal readiness for advanced AI systems, with particular focus on the potential emergence of artificial general intelligence (AGI) and superintelligence.
               </p>
             </section>
             
@@ -170,7 +170,7 @@ export default function WhitePaperPage() {
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
                 </svg>
-                Download Full White Paper
+                Download Full Manifesto
               </a>
             </div>
           </div>
