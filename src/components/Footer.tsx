@@ -82,10 +82,10 @@ const Footer = () => {
                 </svg>
                 <div className="text-white/80">
                   <div className="mb-4">
-                    <strong>United States</strong><br />
-                    701 Tillery Street<br />
-                    Austin, TX 78702<br />
-                    United States
+                    <strong>United States</strong>
+                    <br />2895, 701 Tillery Street Street Unit 12
+                    <br />Austin, TX, Travis,
+                    <br />US
                   </div>
                   <div>
                     <strong>Qatar</strong><br />

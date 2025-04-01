@@ -1,5 +1,7 @@
 import React from 'react';
 import WorldMap from './WorldMap';
+import Image from 'next/image';
+
 
 const GlobalInitiatives = () => {
   return (
@@ -27,7 +29,12 @@ const GlobalInitiatives = () => {
           {/* Initiative 1 */}
           <div className="card">
             <div className="h-40 bg-gray-200 rounded-t-lg flex items-center justify-center">
-              <p className="text-gray-500">Initiative image</p>
+              <img 
+              src="/images/ai_workshop.jpg" 
+              alt="Description of Initiative" 
+              className="w-full h-full object-cover"
+            />
+              {/*<p className="text-gray-500">Initiative image</p>*/}
             </div>
             <div className="p-6">
               <div className="flex justify-between items-center mb-3">
@@ -50,7 +57,12 @@ const GlobalInitiatives = () => {
           {/* Initiative 2 */}
           <div className="card">
             <div className="h-40 bg-gray-200 rounded-t-lg flex items-center justify-center">
-              <p className="text-gray-500">Initiative image</p>
+            <img 
+              src="/images/image_of_EU_parliament.jpg" 
+              alt="Description of Initiative" 
+              className="w-full h-full object-cover"
+            />
+              {/*<p className="text-gray-500">Initiative image</p>*/}
             </div>
             <div className="p-6">
               <div className="flex justify-between items-center mb-3">
@@ -73,7 +85,12 @@ const GlobalInitiatives = () => {
           {/* Initiative 3 */}
           <div className="card">
             <div className="h-40 bg-gray-200 rounded-t-lg flex items-center justify-center">
-              <p className="text-gray-500">Initiative image</p>
+             <img 
+              src="/images/global_collaboration.jpg" 
+              alt="Description of Initiative" 
+              className="w-full h-full object-cover"
+            />
+              {/*<p className="text-gray-500">Initiative image</p>*/}
             </div>
             <div className="p-6">
               <div className="flex justify-between items-center mb-3">

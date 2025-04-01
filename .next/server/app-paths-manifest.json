@@ -1,3 +1,5 @@
 {
-  "/api/init-db/route": "app/api/init-db/route.js"
+  "/page": "app/page.js",
+  "/ai-townsquare/page": "app/ai-townsquare/page.js",
+  "/book/page": "app/book/page.js"
 }
