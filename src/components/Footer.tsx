@@ -85,7 +85,6 @@ const Footer = () => {
                     <strong>United States</strong>
                     <br />2895, 701 Tillery Street Street Unit 12
                     <br />Austin, TX, Travis,
-                    <br />US
                   </div>
                   <div>
                     <strong>Qatar</strong><br />
