@@ -1,4 +1,5 @@
 {
-  "/readiness/page": "app/readiness/page.js",
-  "/readiness/white-paper/page": "app/readiness/white-paper/page.js"
+  "/not-found": "app/not-found.js",
+  "/page": "app/page.js",
+  "/book/page": "app/book/page.js"
 }
