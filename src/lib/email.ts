@@ -4,8 +4,8 @@ import { Resend } from 'resend';
 const resend = new Resend(process.env.RESEND_API_KEY as string);
 
 // Admin email address to receive notifications
-const ADMIN_EMAIL = process.env.ADMIN_EMAIL || 'info@safehaven.org';
-const FROM_EMAIL = process.env.FROM_EMAIL || 'no-reply@safehaven.org';
+const ADMIN_EMAIL = process.env.ADMIN_EMAIL || 'info@safehaven.world';
+const FROM_EMAIL = process.env.FROM_EMAIL || 'no-reply@safehaven.world';
 
 /**
  * Send confirmation email to users after form submission.
