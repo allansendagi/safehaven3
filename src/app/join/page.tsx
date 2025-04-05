@@ -15,7 +15,7 @@ export default function ContactPage() {
           </p>
           
           <div className="bg-white rounded-lg shadow-lg p-8 animate-slide-up">
-            <form className="space-y-6">
+            <form className="space-y-6" method="POST" action="/api/contact">
               <div className="grid md:grid-cols-2 gap-6">
                 <div>
                   <label htmlFor="firstName" className="block text-sm font-medium text-gray-700 mb-1">
