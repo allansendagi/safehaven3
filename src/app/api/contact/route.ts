@@ -1,10 +1,15 @@
 import { NextResponse } from 'next/server';
-import { sql } from '@vercel/postgres';
+import { createClient } from '@vercel/postgres'; // Change from importing sql
 import { sendConfirmationEmail, sendNotificationEmail } from '@/lib/email';
 
-
 export async function POST(request: Request) {
+  // Create a client for direct connection instead of using sql
+  const client = createClient();
+  
   try {
+    // Connect to the database
+    await client.connect();
+    
     const { firstName, lastName, email, organization, subject, message, newsletter } = await request.json();
 
     // Validate required fields
@@ -24,7 +29,7 @@ export async function POST(request: Request) {
     }
 
     // Insert contact submission
-    await sql`
+    await client.query(`
       INSERT INTO contact_submissions (
         first_name, 
         last_name, 
@@ -36,28 +41,22 @@ export async function POST(request: Request) {
         submitted_at
       )
       VALUES (
-        ${firstName}, 
-        ${lastName}, 
-        ${email}, 
-        ${organization || null}, 
-        ${subject}, 
-        ${message}, 
-        ${newsletter || false},
-        NOW()
+        $1, $2, $3, $4, $5, $6, $7, NOW()
       )
-    `;
+    `, [firstName, lastName, email, organization || null, subject, message, newsletter || false]);
 
     // If user opted in for newsletter, add to newsletter subscribers
     if (newsletter) {
-      const existingSubscriber = await sql`
-        SELECT * FROM newsletter_subscribers WHERE email = ${email}
-      `;
+      const existingSubscriber = await client.query(
+        `SELECT * FROM newsletter_subscribers WHERE email = $1`,
+        [email]
+      );
 
       if (existingSubscriber.rowCount === 0) {
-        await sql`
-          INSERT INTO newsletter_subscribers (email, subscribed_at)
-          VALUES (${email}, NOW())
-        `;
+        await client.query(
+          `INSERT INTO newsletter_subscribers (email, subscribed_at) VALUES ($1, NOW())`,
+          [email]
+        );
       }
     }
 
@@ -90,5 +89,8 @@ export async function POST(request: Request) {
       { error: 'An error occurred while processing your request' },
       { status: 500 }
     );
+  } finally {
+    // Always close the client connection
+    await client.end();
   }
 }
