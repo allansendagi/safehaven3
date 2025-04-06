@@ -31,7 +31,7 @@ const Header = () => {
             {/*<Link href="/challenge" className="text-gray-700 hover:text-[var(--primary)] text-base font-medium">The Challenge</Link>*/}
             {/*<Link href="/approach" className="text-gray-700 hover:text-[var(--primary)] text-base font-medium">Our Approach</Link>*/}
             <Link href="/ai-townsquare" className="text-gray-700 hover:text-[var(--primary)] font-semibold">AI TownSquare</Link>
-            <Link href="/readiness" className="text-gray-700 hover:text-[var(--primary)] font-semibold">Societal Readiness</Link>
+            <Link href="/readiness" className="text-gray-700 hover:text-[var(--primary)] font-semibold">Societal Readiness Index</Link>
             <Link href="/readiness-institute" className="text-gray-700 hover:text-[var(--primary)] font-semibold">Readiness Institute</Link>
             <Link href="/initiatives" className="text-gray-700 hover:text-[var(--primary)] font-semibold">Initiatives</Link>
             <Link href="/resources" className="text-gray-700 hover:text-[var(--primary)] font-semibold">Resources</Link>
