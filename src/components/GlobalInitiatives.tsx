@@ -30,7 +30,7 @@ const GlobalInitiatives = () => {
           <div className="card">
             <div className="h-40 bg-gray-200 rounded-t-lg flex items-center justify-center">
               <img 
-              src="/images/ai_workshop.jpg" 
+              src="/images/ai_workshop.png" 
               alt="Description of Initiative" 
               className="w-full h-full object-cover"
             />
