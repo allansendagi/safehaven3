@@ -36,7 +36,7 @@ export default function WhitePaperPage() {
                 <p className="mb-4 text-[var(--background)]">
                   This manifesto presents a framework for assessing and enhancing societal readiness for advanced artificial intelligence and potential superintelligence. It outlines the challenges of exponential AI growth against linear societal adaptation and proposes structured approaches to bridge this gap.
                 </p>
-                <p className="text-gray-700 mb-6">
+                <p className="text-[var(--background)] mb-6">
                   The Societal Readiness Index (SRI) introduced here provides a quantifiable metric for measuring preparedness across governance, technical literacy, ethical frameworks, infrastructure, and social adaptation dimensions.
                 </p>
                 <div className="flex flex-col sm:flex-row gap-4">
