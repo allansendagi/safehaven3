@@ -33,7 +33,7 @@ export default function WhitePaperPage() {
               
               <div className="w-full md:w-2/3">
                 <h3 className="text-2xl font-bold text-[var(--background)] mb-4">Executive Summary</h3>
-                <p className="text-gray-700 mb-4">
+                <p className="mb-4 text-[var(--background)]">
                   This manifesto presents a framework for assessing and enhancing societal readiness for advanced artificial intelligence and potential superintelligence. It outlines the challenges of exponential AI growth against linear societal adaptation and proposes structured approaches to bridge this gap.
                 </p>
                 <p className="text-gray-700 mb-6">
