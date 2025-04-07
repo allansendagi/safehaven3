@@ -41,7 +41,7 @@ export default function WhitePaperPage() {
                 </p>
                 <div className="flex flex-col sm:flex-row gap-4">
                   <a 
-                    href="/documents/White Paper - Towards Societal Readiness.pdf" 
+                    href="/documents/Towards Societal Readiness-Manifesto.pdf" 
                     download
                     className="btn-primary flex items-center justify-center"
                   >
