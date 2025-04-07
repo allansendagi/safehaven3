@@ -110,7 +110,7 @@ code {
   display: inline-block;
   background-color: transparent;
   border: 2px solid currentColor;
-  color: var(--primary);
+  color: #f8fafc;
   font-weight: 600;
   padding: 0.625rem 1.25rem;
   border-radius: 0.375rem;

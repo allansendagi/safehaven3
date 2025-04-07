@@ -50,7 +50,7 @@ export default function WhitePaperPage() {
                     </svg>
                     Download PDF
                   </a>
-                  <button className="btn-outline btn-primary ">
+                  <button className="btn-outline">
                     Read Online
                   </button>
                 </div>
