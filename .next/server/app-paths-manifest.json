@@ -1,4 +1,4 @@
 {
-  "/ai-townsquare/page": "app/ai-townsquare/page.js",
-  "/page": "app/page.js"
+  "/page": "app/page.js",
+  "/ai-townsquare/page": "app/ai-townsquare/page.js"
 }
