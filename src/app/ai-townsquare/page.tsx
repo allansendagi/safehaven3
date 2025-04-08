@@ -92,6 +92,24 @@ export default function AITownSquarePage() {
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             <div className="card">
               <div className="bg-[var(--primary)] text-white text-sm font-bold px-3 py-1 rounded-full inline-block mb-4">
+                AI TOWNSQUARE HEALTHCARE
+              </div>
+              <h3 className="text-xl font-semibold mb-2">The World’s First Healthcare AI TownSquare</h3>
+              <p className="text-gray-600 mb-4">
+                Discover how to develop AI-powered clinical assistants that healthcare professionals trust—solutions already deployed by Pfizer, Sanofi, and government health departments worldwide.
+              </p>
+              <div className="flex items-center text-gray-500 mb-6">
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                </svg>
+                <span>2025 • Date to be Announced</span>
+              </div>
+              <Link href="https://aitownsquaredoha.scoreapp.com/" className="btn-outline w-full text-center">
+                Register Your Interest
+              </Link>
+            </div>
+            <div className="card">
+              <div className="bg-[var(--primary)] text-white text-sm font-bold px-3 py-1 rounded-full inline-block mb-4">
                 VIRTUAL FORUM
               </div>
               <h3 className="text-xl font-semibold mb-2">Global AI Governance Dialogue</h3>
