@@ -1,10 +1,17 @@
 import { NextResponse } from 'next/server';
-import { sql } from '@vercel/postgres';
-// import { sendConfirmationEmail, sendNotificationEmail } from '../../../../backend_implementation/lib/email';
+import { createClient } from '@vercel/postgres';  // Change from importing sql
 import { sendConfirmationEmail, sendNotificationEmail } from '@/lib/email';
 
 export async function POST(request: Request) {
+  // Create a client for direct connection instead of using sql
+  const client = createClient({
+    connectionString: process.env.DATABASE_URL || process.env.POSTGRES_URL_DIRECT
+  });
+  
   try {
+    // Connect to the database
+    await client.connect();
+    
     const { firstName, lastName, email, organization } = await request.json();
 
     // Validate required fields
@@ -25,7 +32,7 @@ export async function POST(request: Request) {
 
     // Check if the book_preorders table exists, create it if not
     try {
-      await sql`
+      await client.query(`
         CREATE TABLE IF NOT EXISTS book_preorders (
           id SERIAL PRIMARY KEY,
           first_name VARCHAR(255) NOT NULL,
@@ -34,13 +41,13 @@ export async function POST(request: Request) {
           organization VARCHAR(255),
           submitted_at TIMESTAMP WITH TIME ZONE NOT NULL
         )
-      `;
+      `);
     } catch (tableError) {
       console.error('Error creating book_preorders table:', tableError);
     }
 
     // Insert book preorder
-    await sql`
+    await client.query(`
       INSERT INTO book_preorders (
         first_name, 
         last_name, 
@@ -49,13 +56,9 @@ export async function POST(request: Request) {
         submitted_at
       )
       VALUES (
-        ${firstName}, 
-        ${lastName}, 
-        ${email}, 
-        ${organization || null},
-        NOW()
+        $1, $2, $3, $4, NOW()
       )
-    `;
+    `, [firstName, lastName, email, organization || null]);
 
     // Send confirmation email to user
     try {
@@ -93,5 +96,8 @@ export async function POST(request: Request) {
       { error: 'An error occurred while processing your request' },
       { status: 500 }
     );
+  } finally {
+    // Always close the client connection
+    await client.end();
   }
 }
