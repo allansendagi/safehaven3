@@ -1,9 +1,15 @@
 import { NextResponse } from 'next/server';
-import { sql } from '@vercel/postgres';
-import { sendConfirmationEmail } from '@/lib/email'; // Fixed import path
+import { createClient } from '@vercel/postgres';
+import { sendConfirmationEmail } from '@/lib/email';
 
 export async function POST(request: Request) {
+  // Create a client for direct connection instead of using sql
+  const client = createClient();
+  
   try {
+    // Connect to the database
+    await client.connect();
+    
     const { email } = await request.json();
 
     // Validate email
@@ -15,9 +21,10 @@ export async function POST(request: Request) {
     }
 
     // Check if email already exists
-    const existingSubscriber = await sql`
-      SELECT * FROM newsletter_subscribers WHERE email = ${email}
-    `;
+    const existingSubscriber = await client.query(
+      `SELECT * FROM newsletter_subscribers WHERE email = $1`,
+      [email]
+    );
 
     if (existingSubscriber.rowCount > 0) {
       return NextResponse.json(
@@ -27,10 +34,11 @@ export async function POST(request: Request) {
     }
 
     // Insert new subscriber
-    await sql`
-      INSERT INTO newsletter_subscribers (email, subscribed_at)
-      VALUES (${email}, NOW())
-    `;
+    await client.query(
+      `INSERT INTO newsletter_subscribers (email, subscribed_at)
+       VALUES ($1, NOW())`,
+      [email]
+    );
 
     // Send confirmation email
     try {
@@ -50,5 +58,8 @@ export async function POST(request: Request) {
       { error: 'An error occurred while processing your request' },
       { status: 500 }
     );
+  } finally {
+    // Always close the client connection
+    await client.end();
   }
 }
