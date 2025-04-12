@@ -13,7 +13,7 @@ export default function AITownSquarePage() {
               AI TownSquare
             </h1>
             <p className="text-xl mb-8 animate-fade-in">
-              A global platform for AI literacy and participatory governance, fostering dialogue and collaborative decision-making about AI's future.
+              The mission is to bridge the gap betweeen AI's advancement and societal readiness.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center animate-slide-up">
               <Link href="#upcoming-events" className="btn-accent">
@@ -34,7 +34,7 @@ export default function AITownSquarePage() {
             <div>
               <h2 className="section-subtitle mb-4">What is AI TownSquare?</h2>
               <p className="text-gray-700 mb-4">
-                AI TownSquare is a global initiative designed to bridge the gap between exponential AI growth and linear societal adaptation through education, dialogue, and participatory governance.
+               AI TownSquare is a global platform designed to bridge the gap between exponential AI growth and society’s linear adaptation—through education, dialogue, and participatory governance. It fosters AI literacy and empowers collaborative, democratic decision-making about our shared future with AI.
               </p>
               <p className="text-gray-700 mb-4">
                 As AI systems become increasingly powerful and integrated into our daily lives, it's essential that citizens, organizations, and governments have the knowledge and platforms to engage meaningfully in shaping AI's development and deployment.
