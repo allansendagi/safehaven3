@@ -20,7 +20,7 @@ export default function ReadinessPage() {
             <Link href="/readiness/white-paper" className="btn-primary">
               Read the Manifesto
             </Link>
-            <a href="/documents/White Paper - Towards Societal Readiness.pdf" download className="btn-outline">
+            <a href="/documents/Towards Societal Readiness-Manifesto.pdf" download className="btn-outline">
               Download PDF
             </a>
           </div>

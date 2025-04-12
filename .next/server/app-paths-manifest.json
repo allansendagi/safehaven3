@@ -1,4 +1,5 @@
 {
   "/page": "app/page.js",
-  "/ai-townsquare/page": "app/ai-townsquare/page.js"
+  "/readiness/white-paper/page": "app/readiness/white-paper/page.js",
+  "/readiness/page": "app/readiness/page.js"
 }
