@@ -77,7 +77,7 @@ export default function WhitePaperPage() {
                     <div>
                       <h3 className="text-2xl font-bold mb-2">Manifesto</h3>
                       <p className="text-lg mb-4">Towards Societal Readiness</p>
-                      <p className="text-sm">Readiness Institute</p>
+                      <p className="text-sm">The Readiness Institute</p>
                       <p className="text-sm">2025</p>
                     </div>
                   </div>
