@@ -1,5 +1,5 @@
 {
   "/page": "app/page.js",
-  "/readiness/white-paper/page": "app/readiness/white-paper/page.js",
-  "/readiness/page": "app/readiness/page.js"
+  "/readiness/page": "app/readiness/page.js",
+  "/readiness/white-paper/page": "app/readiness/white-paper/page.js"
 }

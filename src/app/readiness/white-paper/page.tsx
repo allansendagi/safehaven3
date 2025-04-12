@@ -1,14 +1,59 @@
 "use client";
 
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 
 export default function WhitePaperPage() {
   const [showPdf, setShowPdf] = React.useState(false);
+  const [isLoading, setIsLoading] = React.useState(false);
+  const [loadError, setLoadError] = React.useState(false);
+  const timeoutRef = useRef(null);
+  
+  useEffect(() => {
+    // Clean up timeout if component unmounts
+    return () => {
+      if (timeoutRef.current) {
+        clearTimeout(timeoutRef.current);
+      }
+    };
+  }, []);
   
   const togglePdfView = () => {
+    if (!showPdf) {
+      setIsLoading(true);
+      setLoadError(false);
+      
+      // Set a timeout to handle cases where onLoad never fires
+      timeoutRef.current = setTimeout(() => {
+        setIsLoading(false);
+        setLoadError(true);
+      }, 8000); // Wait 8 seconds before showing error
+    } else {
+      // Clear timeout when hiding PDF
+      if (timeoutRef.current) {
+        clearTimeout(timeoutRef.current);
+      }
+    }
     setShowPdf(!showPdf);
+  };
+  
+  const handlePdfLoad = () => {
+    // Clear timeout on successful load
+    if (timeoutRef.current) {
+      clearTimeout(timeoutRef.current);
+    }
+    setIsLoading(false);
+    setLoadError(false);
+  };
+  
+  const handlePdfError = () => {
+    // Clear timeout on error
+    if (timeoutRef.current) {
+      clearTimeout(timeoutRef.current);
+    }
+    setIsLoading(false);
+    setLoadError(true);
   };
   
   return (
@@ -53,7 +98,7 @@ export default function WhitePaperPage() {
                     download
                     className="bg-[#1a365d] hover:bg-[#2c4c7c] text-white font-semibold py-3 px-6 rounded-md transition duration-300 flex items-center justify-center"
                   >
-                    <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2 " fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
                     </svg>
                     Download PDF
@@ -72,13 +117,63 @@ export default function WhitePaperPage() {
           {showPdf ? (
             <div className="mb-12 animate-fade-in">
               <h2 className="section-subtitle mb-4 text-center">Online PDF Viewer</h2>
-              <div className="w-full h-screen border border-gray-300 rounded-lg overflow-hidden">
-                <iframe 
-                  src="/documents/Towards Societal Readiness-Manifesto.pdf" 
-                  className="w-full h-full"
-                  title="Towards Societal Readiness Manifesto"
-                ></iframe>
-              </div>
+              
+              {isLoading && (
+                <div className="flex justify-center items-center h-64">
+                  <div className="loader">
+                    <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-[var(--primary)]"></div>
+                    <p className="mt-4 text-gray-600">Loading PDF...</p>
+                  </div>
+                </div>
+              )}
+              
+              {loadError && (
+                <div className="flex flex-col items-center justify-center p-8 text-center bg-red-50 border border-red-200 rounded-lg">
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-12 w-12 text-red-500 mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                  </svg>
+                  <h3 className="text-lg font-semibold text-red-700 mb-2">Unable to Load PDF</h3>
+                  <p className="text-gray-700 mb-4">
+                    Your device may not support embedded PDFs or the file is taking too long to load.
+                  </p>
+                  <div className="flex flex-col sm:flex-row gap-4">
+                    <a 
+                      href="/documents/Towards Societal Readiness-Manifesto.pdf" 
+                      download
+                      className="bg-[#1a365d] hover:bg-[#2c4c7c] text-white font-semibold py-3 px-6 rounded-md transition duration-300 flex items-center justify-center"
+                    >
+                      <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                      </svg>
+                      Download PDF Instead
+                    </a>
+                    <a 
+                      href="/documents/Towards Societal Readiness-Manifesto.pdf" 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      className="border-2 border-[#1a365d] text-[#1a365d] hover:bg-[#1a365d] hover:text-white font-semibold py-3 px-6 rounded-md transition duration-300 flex items-center justify-center"
+                    >
+                      <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                      </svg>
+                      Open in New Tab
+                    </a>
+                  </div>
+                </div>
+              )}
+              
+              {showPdf && !isLoading && !loadError && (
+                <div className="w-full border border-gray-300 rounded-lg overflow-hidden">
+                  <iframe 
+                    src="/documents/Towards Societal Readiness-Manifesto.pdf" 
+                    className="w-full h-96 md:h-screen max-h-[70vh]"
+                    title="Towards Societal Readiness Manifesto"
+                    onLoad={handlePdfLoad}
+                    onError={handlePdfError}
+                  ></iframe>
+                </div>
+              )}
+              
               <div className="text-center mt-4">
                 <button 
                   onClick={togglePdfView}
@@ -90,7 +185,6 @@ export default function WhitePaperPage() {
             </div>
           ) : (
             <div className="space-y-12 animate-fade-in">
-              {/* Content sections remain unchanged */}
               <section>
                 <h2 className="section-subtitle mb-4">Introduction</h2>
                 <p className="text-gray-700 mb-4">
