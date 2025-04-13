@@ -1,3 +1,4 @@
 {
-  "/page": "app/page.js"
+  "/api/book-preorder/route": "app/api/book-preorder/route.js",
+  "/book/page": "app/book/page.js"
 }
