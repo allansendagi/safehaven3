@@ -1,15 +1,11 @@
 import { NextResponse } from 'next/server';
-import { createClient } from '@vercel/postgres';
+import { createPool } from '@vercel/postgres';
 import { sendConfirmationEmail } from '@/lib/email';
 
 export async function POST(request: Request) {
-  // Create a client for direct connection instead of using sql
-  const client = createClient();
+  const pool = createPool();
   
   try {
-    // Connect to the database
-    await client.connect();
-    
     const { email } = await request.json();
 
     // Validate email
@@ -21,7 +17,7 @@ export async function POST(request: Request) {
     }
 
     // Check if email already exists
-    const existingSubscriber = await client.query(
+    const existingSubscriber = await pool.query(
       `SELECT * FROM newsletter_subscribers WHERE email = $1`,
       [email]
     );
@@ -34,7 +30,7 @@ export async function POST(request: Request) {
     }
 
     // Insert new subscriber
-    await client.query(
+    await pool.query(
       `INSERT INTO newsletter_subscribers (email, subscribed_at)
        VALUES ($1, NOW())`,
       [email]
@@ -45,7 +41,6 @@ export async function POST(request: Request) {
       await sendConfirmationEmail(email, 'newsletter');
     } catch (emailError) {
       console.error('Failed to send confirmation email:', emailError);
-      // Continue with the subscription process even if email fails
     }
 
     return NextResponse.json(
@@ -58,8 +53,5 @@ export async function POST(request: Request) {
       { error: 'An error occurred while processing your request' },
       { status: 500 }
     );
-  } finally {
-    // Always close the client connection
-    await client.end();
   }
 }
