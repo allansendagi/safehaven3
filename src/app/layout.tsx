@@ -4,27 +4,23 @@ import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Analytics } from "@vercel/analytics/react"
-
 // Font configurations
 const inter = Inter({
   subsets: ['latin'],
   variable: '--font-inter'
 });
-
 const montserrat = Montserrat({
   subsets: ["latin"],
   display: "swap",
   variable: "--font-montserrat",
   weight: ["400", "500", "600", "700"]
 });
-
 const openSans = Open_Sans({
   subsets: ["latin"],
   display: "swap",
   variable: "--font-open-sans",
   weight: ["400", "500", "600"]
 });
-
 export const metadata: Metadata = {
   title: "Safehaven - Preparing Civilization for AI and Superintelligence",
   description:
@@ -32,7 +28,6 @@ export const metadata: Metadata = {
   keywords:
     "AI, artificial intelligence, superintelligence, societal readiness, AI governance, AI TownSquare, global AI initiatives",
 };
-
 export default function RootLayout({
   children,
 }: {
@@ -40,7 +35,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className={`${montserrat.variable} ${openSans.variable} ${inter.variable}`}>
-      <body className={openSans.className}>
+      <body className="font-sans">
         <Header />
         {children}
         <Footer />

@@ -1,9 +1,24 @@
+"use client";
+
 import React from 'react';
 import Link from 'next/link';
 import GlobalReadinessVisualization from '@/components/GlobalReadinessVisualization';
 import RegionalReadinessCards from '@/components/RegionalReadinessCards';
+import { trackEvent, EventTypes } from '@/utils/analytics';
+import { useRouter } from 'next/navigation';
 
 export default function ReadinessPage() {
+  const router = useRouter();
+  
+  const handleClick = async () => {
+    await trackEvent(EventTypes.BUTTON_CLICK, {
+      buttonId: 'start-assessment',
+      location: 'readiness-page'
+    });
+    
+    router.push('/readiness-assessment');
+  };
+
   return (
     <div className="min-h-screen bg-white py-16">
       <div className="container-wide">
@@ -116,9 +131,9 @@ export default function ReadinessPage() {
           </p>
           
           <div className="flex justify-center">
-            <Link href="/readiness-assessment" className="btn-primary">
+            <button onClick={handleClick} className="btn-primary">
               Start Assessment
-            </Link>
+            </button>
           </div>
         </div>
       </div>

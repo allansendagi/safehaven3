@@ -3,6 +3,43 @@
 import React, { useEffect, useRef } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
+import { trackEvent, EventTypes } from '@/utils/analytics';
+
+
+function DownloadButton({ 
+  href, 
+  documentName, 
+  location, 
+  className = "btn-primary flex items-center justify-center",
+  children
+}) {
+  const handleDownload = async () => {
+    await trackEvent(EventTypes.DOWNLOAD, {
+      documentName,
+      location,
+      timestamp: new Date().toISOString()
+    });
+  };
+  
+  return (
+    <a 
+      href={href}
+      download
+      onClick={handleDownload}
+      className={className}
+    >
+      {children || (
+        <>
+          <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+          </svg>
+          Download PDF
+        </>
+      )}
+    </a>
+  );
+}
+
 
 export default function WhitePaperPage() {
   const [showPdf, setShowPdf] = React.useState(false);
@@ -93,16 +130,17 @@ export default function WhitePaperPage() {
                   The Societal Readiness Index (SRI) introduced here provides a quantifiable metric for measuring preparedness across governance, technical literacy, ethical frameworks, infrastructure, and social adaptation dimensions.
                 </p>
                 <div className="flex flex-col sm:flex-row gap-4">
-                  <a 
+                  <DownloadButton 
                     href="/documents/Towards Societal Readiness-Manifesto.pdf" 
-                    download
+                    documentName="Societal Readiness Manifesto"
+                    location="white-paper-page"
                     className="bg-[#1a365d] hover:bg-[#2c4c7c] text-white font-semibold py-3 px-6 rounded-md transition duration-300 flex items-center justify-center"
                   >
                     <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
                     </svg>
                     Download PDF
-                  </a>
+                  </DownloadButton>
                   <button 
                     className="border-2 border-[#2c4c7c] text-[#2c4c7c] hover:bg-[#1a365d] hover:text-white font-semibold py-3 px-6 rounded-md transition duration-300"
                     onClick={togglePdfView}
@@ -137,16 +175,17 @@ export default function WhitePaperPage() {
                     Your device may not support embedded PDFs or the file is taking too long to load.
                   </p>
                   <div className="flex flex-col sm:flex-row gap-4">
-                    <a 
+                    <DownloadButton
                       href="/documents/Towards Societal Readiness-Manifesto.pdf" 
-                      download
+                      documentName="Societal Readiness Manifesto"
+                      location="white-paper-page-error"
                       className="bg-[#1a365d] hover:bg-[#2c4c7c] text-white font-semibold py-3 px-6 rounded-md transition duration-300 flex items-center justify-center"
                     >
                       <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
                       </svg>
                       Download PDF Instead
-                    </a>
+                    </DownloadButton>
                     <a 
                       href="/documents/Towards Societal Readiness-Manifesto.pdf" 
                       target="_blank" 
@@ -288,16 +327,17 @@ export default function WhitePaperPage() {
               </section>
               
               <div className="text-center pt-8">
-                <a 
-                  href="/documents/White Paper - Towards Societal Readiness.pdf" 
-                  download
+                <DownloadButton 
+                  href="/documents/Towards Societal Readiness-Manifesto.pdf"
+                  documentName="Societal Readiness Manifesto"
+                  location="white-paper-page-conclusion"
                   className="bg-[#1a365d] hover:bg-[#2c4c7c] text-white font-semibold py-3 px-6 rounded-md transition duration-300 inline-flex items-center"
                 >
                   <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
                   </svg>
                   Download Full Manifesto
-                </a>
+                </DownloadButton>
               </div>
             </div>
           )}
