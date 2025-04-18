@@ -10,7 +10,7 @@ export async function GET(request: Request) {
     
     if (!connectionTest.success) {
       return NextResponse.json(
-        { error: 'Database connection failed', details: connectionTest.error },
+        { error: 'Database connection failed', details: connectionTest.error, env: connectionTest.env },
         { status: 500 }
       );
     }
@@ -28,7 +28,8 @@ export async function GET(request: Request) {
     return NextResponse.json(
       { 
         message: 'Database initialized successfully',
-        connection: connectionTest
+        connection: connectionTest,
+        eventCount: result.eventCount
       },
       { status: 200 }
     );

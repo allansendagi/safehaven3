@@ -73,6 +73,7 @@ export default function DebugEnvVars() {
                     <li>Check that your database URL is correctly formatted</li>
                     <li>Verify that the database server is running and accessible</li>
                     <li>Ensure your IP address is allowed in database firewall rules</li>
+                    <li>Add POSTGRES_URL to your environment variables</li>
                     <li>Try initializing the database again using the button above</li>
                     <li>Check the server logs for more detailed error information</li>
                   </ul>
