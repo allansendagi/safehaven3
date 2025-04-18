@@ -36,10 +36,14 @@ function isValidAuthHeader(authHeader: string): boolean {
     const decodedCredentials = Buffer.from(encodedCredentials, 'base64').toString();
     const [username, password] = decodedCredentials.split(':');
     
-    // Replace these values with your desired admin credentials
-    // In production, you should use environment variables
+    // Use environment variables and add some debugging
     const ADMIN_USERNAME = process.env.ADMIN_USERNAME || 'admin';
-    const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || 'safehaven2025';
+    const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || 'admin';
+    
+    console.log('Auth attempt:', { 
+      provided: { username, password: '********' },
+      expected: { username: ADMIN_USERNAME, password: '********' }
+    });
     
     return username === ADMIN_USERNAME && password === ADMIN_PASSWORD;
   } catch (error) {

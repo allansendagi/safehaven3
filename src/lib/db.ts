@@ -17,7 +17,6 @@ export async function initializeDatabase() {
         CONSTRAINT email_format CHECK (email ~* '^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$')
       );
     `;
-
     // Create contact_submissions table
     await sql`
       CREATE TABLE IF NOT EXISTS contact_submissions (
@@ -33,7 +32,6 @@ export async function initializeDatabase() {
         status VARCHAR(50) DEFAULT 'new'
       );
     `;
-
     // Create resources table for resource library
     await sql`
       CREATE TABLE IF NOT EXISTS resources (
@@ -46,7 +44,6 @@ export async function initializeDatabase() {
         updated_at TIMESTAMP NOT NULL
       );
     `;
-
     // Create users table for authentication
     await sql`
       CREATE TABLE IF NOT EXISTS users (
@@ -59,7 +56,6 @@ export async function initializeDatabase() {
         last_login TIMESTAMP
       );
     `;
-
     // Create analytics_events table for tracking
     await sql`
       CREATE TABLE IF NOT EXISTS analytics_events (
@@ -73,9 +69,33 @@ export async function initializeDatabase() {
         FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE SET NULL
       );
     `;
-
+    
+    // Insert a test event (from the first file)
+    await sql`
+      INSERT INTO analytics_events (
+        event_type, 
+        event_data, 
+        ip_address, 
+        user_agent, 
+        created_at
+      )
+      VALUES (
+        'test_event', 
+        '{"message": "This is a test event"}'::jsonb, 
+        '127.0.0.1', 
+        'Analytics Initialization', 
+        NOW()
+      )
+    `;
+    
+    // Get count of events (from the first file)
+    const countResult = await sql`SELECT COUNT(*) FROM analytics_events`;
+    
     console.log('Database initialized successfully');
-    return { success: true };
+    return { 
+      success: true,
+      eventCount: countResult.rows[0].count
+    };
   } catch (error) {
     console.error('Failed to initialize database:', error);
     return { success: false, error };
@@ -97,7 +117,12 @@ export async function testConnection() {
     console.error('Database connection failed:', error);
     return { 
       success: false, 
-      error: error instanceof Error ? error.message : String(error)
+      error: error instanceof Error ? error.message : String(error),
+      env: {
+        hasDbUrl: !!process.env.DATABASE_URL,
+        hasPostgresUrl: !!process.env.POSTGRES_URL,
+        hasPrismaUrl: !!process.env.POSTGRES_PRISMA_URL
+      }
     };
   }
 }
