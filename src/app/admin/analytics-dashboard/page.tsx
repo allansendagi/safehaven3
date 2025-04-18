@@ -5,14 +5,7 @@ import { sql } from '@vercel/postgres';
 import { Chart } from '@/components/Chart';
 import { formatDistance } from 'date-fns';
 import DebugEnvVars from './debug';
-
-// In your analytics-dashboard/page.tsx
-// Add this at the top of the file to log available environment variables
-console.log('Environment variables check:', {
-  DATABASE_URL: !!process.env.DATABASE_URL,
-  POSTGRES_URL: !!process.env.POSTGRES_URL,
-  POSTGRES_PRISMA_URL: !!process.env.POSTGRES_PRISMA_URL
-});
+import { testConnection } from '@/lib/db';
 
 // Define types for our data
 interface AnalyticsEvent {
@@ -42,8 +35,16 @@ export default async function AnalyticsDashboard() {
   let dailyCounts: DailyEventCount[] = [];
   let downloadEvents: AnalyticsEvent[] = [];
   let error = null;
+  let connectionStatus = null;
 
   try {
+    // Test DB connection first
+    connectionStatus = await testConnection();
+    
+    if (!connectionStatus.success) {
+      throw new Error(`Database connection failed: ${connectionStatus.error}`);
+    }
+    
     // Fetch events from the database using sql tag template
     const eventsResult = await sql`
       SELECT * FROM analytics_events
@@ -132,6 +133,16 @@ export default async function AnalyticsDashboard() {
             <div className="bg-red-100 border-l-4 border-red-500 text-red-700 p-4 mb-6">
               <p className="font-bold">Error</p>
               <p>{error}</p>
+              
+              {connectionStatus && !connectionStatus.success && (
+                <div className="mt-2">
+                  <p className="font-semibold">Connection Status:</p>
+                  <pre className="whitespace-pre-wrap overflow-auto bg-gray-50 p-2 mt-1 rounded text-sm">
+                    {JSON.stringify(connectionStatus, null, 2)}
+                  </pre>
+                </div>
+              )}
+              
               <p className="mt-2">
                 Please check your database connection settings and ensure the tables are properly initialized.
                 You can try running the <code>/api/init-db</code> endpoint to initialize the database.

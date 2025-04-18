@@ -7,6 +7,12 @@ import type { NextRequest } from 'next/server';
 export function middleware(request: NextRequest) {
   // Only apply to admin routes
   if (request.nextUrl.pathname.startsWith('/admin')) {
+    // Skip auth in development mode if BYPASS_ADMIN_AUTH is set
+    if (process.env.NODE_ENV === 'development' && process.env.BYPASS_ADMIN_AUTH === 'true') {
+      console.log('Bypassing admin authentication in development mode');
+      return NextResponse.next();
+    }
+    
     // Check for basic auth headers
     const authHeader = request.headers.get('authorization');
     
@@ -36,14 +42,14 @@ function isValidAuthHeader(authHeader: string): boolean {
     const decodedCredentials = Buffer.from(encodedCredentials, 'base64').toString();
     const [username, password] = decodedCredentials.split(':');
     
-    // Use environment variables and add some debugging
+    // Use environment variables with fallbacks
     const ADMIN_USERNAME = process.env.ADMIN_USERNAME || 'admin';
     const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || 'admin';
     
-    console.log('Auth attempt:', { 
-      provided: { username, password: '********' },
-      expected: { username: ADMIN_USERNAME, password: '********' }
-    });
+    // Avoid logging sensitive information in production
+    if (process.env.NODE_ENV !== 'production') {
+      console.log('Auth attempt with username:', username);
+    }
     
     return username === ADMIN_USERNAME && password === ADMIN_PASSWORD;
   } catch (error) {
