@@ -171,7 +171,12 @@ export default async function AnalyticsDashboard() {
             <h2 className="text-xl font-semibold mb-4">Events Over Time</h2>
             <div className="h-64">
               {chartData.length > 0 ? (
-                <Chart data={chartData} />
+                <Chart 
+                  data={chartData} 
+                  xKey="name" 
+                  yKey="value"
+                  title="Daily Event Count" 
+                />
               ) : (
                 <div className="flex items-center justify-center h-full text-gray-500">
                   No data available

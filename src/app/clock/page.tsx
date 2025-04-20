@@ -18,7 +18,7 @@ export default function ClockPage() {
         <div className="flex justify-center">
           <iframe
             src="/clock/embed/index.html"
-            style={{ border: 'none', width: 320, height: 140 }}
+            style={{ border: 'none', width: 550, height: 80 }}
             loading="lazy"
           />
         </div>
@@ -30,17 +30,17 @@ export default function ClockPage() {
         <h2 className="text-2xl font-semibold mb-6 text-center">Latest Incident</h2>
         <article className="bg-white shadow rounded-xl p-8">
           <h3 className="text-xl font-semibold">
-            Deep‑fake stock‑market hoax wipes $130 B in tech value
+            Deep‑fake stock‑market hoax wipes $130 B in tech value
           </h3>
           <p className="mt-4">
-            On 15 March 2025, a coordinated deep‑fake video campaign spread across social media
+            On 15 March 2025, a coordinated deep‑fake video campaign spread across social media
             caused a sharp sell‑off of major tech stocks before markets halted trading. Regulators
             cited algorithmic moderation failure and inadequate public resilience to AI‑driven
             misinformation.
           </p>
           <div className="flex flex-wrap gap-2 mt-4">
-            <span className="tag">#Trust & Resilience</span>
-            <span className="tag">#Information Integrity</span>
+            <span className="tag">#Trust & Resilience</span>
+            <span className="tag">#Information Integrity</span>
           </div>
           <Link href="#methodology" className="inline-block mt-4 underline text-sh-dark">
             See methodology
@@ -50,11 +50,10 @@ export default function ClockPage() {
 
       {/* PILLARS */}
      <section className="px-6 py-10 bg-gray-50">
-  <h2 className="text-2xl font-semibold mb-6 text-center">SRI Pillars</h2>
+  <h2 className="text-2xl font-semibold mb-6 text-center">SRI Pillars</h2>
 
   <div className="grid gap-4 md:grid-cols-3 lg:grid-cols-6 text-center">
     {pillars.map(([label, tip]) => (
-      /* ▼ this is the snippet ▼ */
       <div key={label} className="pillar group">
         {label}
         <span className="tooltip">{tip}</span>
@@ -106,7 +105,7 @@ export default function ClockPage() {
           readOnly
           className="w-full border rounded p-4 text-xs"
           rows={4}
-          value={`<iframe src="https://safehavenai.world/clock/embed/index.html" style="border:none;width:320px;height:140px" loading="lazy"></iframe>`}
+          value={`<iframe src="https://safehavenai.world/clock/embed/index.html" style="border:none;width:550px;height:80px" loading="lazy"></iframe>`}
         />
       </section>
 
@@ -125,7 +124,7 @@ export default function ClockPage() {
             Subscribe
           </button>
         </form>
-        <p className="mt-6 text-sm">Next AI TownSquare: Doha • 12 June 2025</p>
+        <p className="mt-6 text-sm">Next AI TownSquare: Doha • 12 June 2025</p>
       </section>
     </>
   )

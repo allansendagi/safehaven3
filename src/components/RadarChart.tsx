@@ -15,8 +15,8 @@ import {
 ChartJS.register(RadialLinearScale, PointElement, LineElement, Filler, Tooltip, Legend)
 
 const dataSet: Record<string, number[]> = {
-  Qatar:   [70, 65, 60, 55, 75, 50],
-  USA:     [85, 78, 70, 68, 80, 60],
+  Qatar: [70, 65, 60, 55, 75, 50],
+  USA: [85, 78, 70, 68, 80, 60],
   Estonia: [72, 80, 75, 63, 70, 70],
 }
 

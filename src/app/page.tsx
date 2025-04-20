@@ -20,7 +20,7 @@ export default function Home() {
       <div className="mt-6 flex justify-center">
   <iframe
     src="/clock/embed/index.html"
-    style={{ border: 'none', width: 260, height: 110 }}
+    style={{ border: 'none', width: 550, height: 80 }}
     loading="lazy"
   />
 </div>

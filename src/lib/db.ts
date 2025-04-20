@@ -1,29 +1,29 @@
-import { sql } from '@vercel/postgres';
+import { createClient, createPool } from '@vercel/postgres';
+
+/**
+ * Helper: Choose the correct client based on connection type
+ */
+function getDatabaseClient() {
+  const pooledUrl = process.env.POSTGRES_URL;
+  const directUrl = process.env.POSTGRES_URL_DIRECT || process.env.POSTGRES_URL_NON_POOLING;
+
+  if (directUrl) {
+    return createClient({ connectionString: directUrl });
+  } else if (pooledUrl) {
+    return createPool(); // Will auto-use POSTGRES_URL from env
+  } else {
+    throw new Error('No valid database connection string available');
+  }
+}
 
 /**
  * Initialize database schema
- * This function creates the necessary tables if they don't exist
  */
 export async function initializeDatabase() {
   try {
-    // Get connection string from various potential environment variables
-    const connectionString = 
-      process.env.POSTGRES_URL || 
-      process.env.DATABASE_URL || 
-      process.env.POSTGRES_URL_DIRECT ||
-      process.env.POSTGRES_URL_NON_POOLING ||
-      process.env.DATABASE_URL_UNPOOLED;
-    
-    if (!connectionString) {
-      throw new Error('No database connection string available');
-    }
-    
-    // Explicitly use the connection string
-    const { createClient } = require('@vercel/postgres');
-    const client = createClient({ connectionString });
+    const client = getDatabaseClient();
     await client.connect();
 
-    // Create newsletter_subscribers table
     await client.query(`
       CREATE TABLE IF NOT EXISTS newsletter_subscribers (
         id SERIAL PRIMARY KEY,
@@ -34,8 +34,7 @@ export async function initializeDatabase() {
         CONSTRAINT email_format CHECK (email ~* '^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$')
       );
     `);
-    
-    // Create contact_submissions table
+
     await client.query(`
       CREATE TABLE IF NOT EXISTS contact_submissions (
         id SERIAL PRIMARY KEY,
@@ -50,8 +49,7 @@ export async function initializeDatabase() {
         status VARCHAR(50) DEFAULT 'new'
       );
     `);
-    
-    // Create resources table for resource library
+
     await client.query(`
       CREATE TABLE IF NOT EXISTS resources (
         id SERIAL PRIMARY KEY,
@@ -63,8 +61,7 @@ export async function initializeDatabase() {
         updated_at TIMESTAMP NOT NULL
       );
     `);
-    
-    // Create users table for authentication
+
     await client.query(`
       CREATE TABLE IF NOT EXISTS users (
         id SERIAL PRIMARY KEY,
@@ -76,8 +73,7 @@ export async function initializeDatabase() {
         last_login TIMESTAMP
       );
     `);
-    
-    // Create analytics_events table for tracking
+
     await client.query(`
       CREATE TABLE IF NOT EXISTS analytics_events (
         id SERIAL PRIMARY KEY,
@@ -90,8 +86,7 @@ export async function initializeDatabase() {
         FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE SET NULL
       );
     `);
-    
-    // Insert a test event
+
     await client.query(`
       INSERT INTO analytics_events (
         event_type, 
@@ -108,17 +103,14 @@ export async function initializeDatabase() {
         NOW()
       )
     `);
-    
-    // Get count of events
+
     const countResult = await client.query('SELECT COUNT(*) FROM analytics_events');
-    
-    // Close the connection
     await client.end();
-    
+
     console.log('Database initialized successfully');
-    return { 
+    return {
       success: true,
-      eventCount: countResult.rows[0].count
+      eventCount: countResult.rows[0].count,
     };
   } catch (error) {
     console.error('Failed to initialize database:', error);
@@ -131,50 +123,31 @@ export async function initializeDatabase() {
  */
 export async function testConnection() {
   try {
-    // First check for available connection strings
-    const connectionString = 
-      process.env.POSTGRES_URL || 
-      process.env.DATABASE_URL || 
-      process.env.POSTGRES_URL_DIRECT ||
-      process.env.POSTGRES_URL_NON_POOLING ||
-      process.env.DATABASE_URL_UNPOOLED;
-    
-    if (!connectionString) {
-      throw new Error('No database connection string available');
-    }
-    
-    // Explicitly use the connection string with createClient
-    const { createClient } = require('@vercel/postgres');
-    const client = createClient({ connectionString });
+    const client = getDatabaseClient();
     await client.connect();
-    
-    // Test the connection
+
     const result = await client.query('SELECT NOW();');
     await client.end();
-    
-    return { 
-      success: true, 
+
+    return {
+      success: true,
       timestamp: result.rows[0].now,
       message: 'Database connection successful',
-      connectionString: connectionString.replace(/:[^:]*@/, ':****@') // Hide password in the response
     };
   } catch (error) {
     console.error('Database connection failed:', error);
-    
-    // Gather available environment variables to help with debugging
-    const dbEnv = {
-      hasDbUrl: !!process.env.DATABASE_URL,
-      hasPostgresUrl: !!process.env.POSTGRES_URL,
-      hasPrismaUrl: !!process.env.POSTGRES_PRISMA_URL,
-      hasPostgresUrlDirect: !!process.env.POSTGRES_URL_DIRECT,
-      hasPostgresUrlNonPooling: !!process.env.POSTGRES_URL_NON_POOLING,
-      hasDbUrlUnpooled: !!process.env.DATABASE_URL_UNPOOLED
-    };
-    
-    return { 
-      success: false, 
+
+    return {
+      success: false,
       error: error instanceof Error ? error.message : String(error),
-      env: dbEnv
+      env: {
+        hasDbUrl: !!process.env.DATABASE_URL,
+        hasPostgresUrl: !!process.env.POSTGRES_URL,
+        hasPrismaUrl: !!process.env.POSTGRES_PRISMA_URL,
+        hasPostgresUrlDirect: !!process.env.POSTGRES_URL_DIRECT,
+        hasPostgresUrlNonPooling: !!process.env.POSTGRES_URL_NON_POOLING,
+        hasDbUrlUnpooled: !!process.env.DATABASE_URL_UNPOOLED,
+      },
     };
   }
 }
