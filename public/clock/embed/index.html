@@ -1,0 +1,55 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Readiness Gap Clock</title>
+<style>
+  body{font-family:Arial,Helvetica,sans-serif;background:#111;color:#f8f8f8;display:flex;justify-content:center;align-items:center;height:100vh;margin:0}
+  #rgc{font-size:2.5rem;background:#222;padding:20px 32px;border-radius:12px;box-shadow:0 8px 16px rgba(0,0,0,0.4);letter-spacing:1px}
+  #rgc span{display:inline-block;min-width:60px;text-align:center}
+  #rgc small{display:block;font-size:0.65rem;color:#888;margin-top:8px}
+  
+</style>
+</head>
+<body>
+  <div id="rgc">
+      <span id="rgc-days">0</span>d&nbsp;
+      <span id="rgc-hours">00</span>h&nbsp;
+      <span id="rgc-mins">00</span>m&nbsp;
+      <span id="rgc-secs">00</span>s
+      <small>Since last major AI safety incident</small>
+  </div>
+
+<script>
+/**
+ * Readiness Gap Clock
+ * Counts up from the timestamp of the last AI safety incident.
+ * Replace INCIDENT_TIMESTAMP with the correct ISO date-time.
+ */
+
+const INCIDENT_TIMESTAMP = '2025-03-15T14:30:00Z'; // <-- Change this
+const lastIncident = new Date(INCIDENT_TIMESTAMP);
+
+function updateClock(){
+    const now = new Date();
+    let diff = Math.floor((now - lastIncident) / 1000);
+
+    const days  = Math.floor(diff / 86400);
+    diff       %= 86400;
+    const hours = Math.floor(diff / 3600);
+    diff       %= 3600;
+    const mins  = Math.floor(diff / 60);
+    const secs  = diff % 60;
+
+    document.getElementById('rgc-days').textContent  = days;
+    document.getElementById('rgc-hours').textContent = hours.toString().padStart(2,'0');
+    document.getElementById('rgc-mins').textContent  = mins.toString().padStart(2,'0');
+    document.getElementById('rgc-secs').textContent  = secs.toString().padStart(2,'0');
+}
+
+updateClock();
+setInterval(updateClock, 1000);
+</script>
+</body>
+</html>

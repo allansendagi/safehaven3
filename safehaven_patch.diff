@@ -1,0 +1,165 @@
+
+diff --git a/tailwind.config.js b/tailwind.config.js
+--- a/tailwind.config.js
++++ b/tailwind.config.js
+@@
+   theme: {
+     extend: {
++      colors: {
++        'sh-dark': '#00171F',
++        'sh-accent': '#ADEBFF'
++      }
+     },
+   },
+ }
+ 
+diff --git a/src/app/page.tsx b/src/app/page.tsx
+--- a/src/app/page.tsx
++++ b/src/app/page.tsx
+@@
+   return (
+     <main>
+       {/* Hero Section */}
++      {/* Readiness Gap Clock embed */}
++      <div className="mt-4 flex justify-center">
++        <iframe
++          src="https://clock.safehavenai.world/embed"
++          style={{ border: 'none', width: 260, height: 110 }}
++          loading="lazy"
++        />
++      </div>
+ 
+diff --git a/src/app/clock/page.tsx b/src/app/clock/page.tsx
+new file mode 100644
+--- /dev/null
++++ b/src/app/clock/page.tsx
+@@
++import RadarChart from '@/components/RadarChart'
++import Link from 'next/link'
++
++export default function ClockPage() {
++  return (
++    <div>
++      {/* Sticky Hero */}
++      <header className="bg-sh-dark text-white text-center py-12 sticky top-0 z-20">
++        <iframe
++          src="https://clock.safehavenai.world/embed"
++          style={{ border: 'none', width: 320, height: 140 }}
++          loading="lazy"
++        />
++        <p className="mt-4 text-lg">How long we've been rolling the dice.</p>
++      </header>
++
++      {/* Latest incident card */}
++      <section className="px-6 py-10 max-w-3xl mx-auto">
++        <h2 className="text-2xl font-semibold mb-6 text-center">Latest Incident</h2>
++        <article className="bg-white shadow-lg rounded-xl p-8">
++          <h3 className="text-xl font-semibold">Deep‑fake stock‑market hoax wipes $130 B in tech value</h3>
++          <p className="mt-4">
++            On 15 March 2025, a coordinated deep‑fake video campaign spread across social media caused a sharp sell‑off of
++            major tech stocks before markets halted trading. Regulators cited algorithmic moderation failure and inadequate
++            public resilience to AI‑driven misinformation.
++          </p>
++          <div className="flex flex-wrap gap-2 mt-4">
++            <span className="bg-sh-accent text-sh-dark px-3 py-1 text-xs rounded-lg">#Trust & Resilience</span>
++            <span className="bg-sh-accent text-sh-dark px-3 py-1 text-xs rounded-lg">#Information Integrity</span>
++          </div>
++          <Link href="#methodology" className="inline-block mt-4 underline text-sh-dark">
++            See methodology
++          </Link>
++        </article>
++      </section>
++
++      {/* Pillars strip */}
++      <section className="px-6 py-10 bg-gray-50">
++        <h2 className="text-2xl font-semibold mb-6 text-center">SRI Pillars</h2>
++        <div className="grid gap-4 md:grid-cols-3 lg:grid-cols-6 text-center">
++          {['Governance Agility', 'Citizen Empowerment', 'Ethical AI', 'Economic Adaptability', 'Tech & Data', 'Inclusive Foresight'].map(
++            (p) => (
++              <div key={p} className="bg-white rounded-lg p-4 shadow">
++                {p}
++              </div>
++            )
++          )}
++        </div>
++      </section>
++
++      {/* Country lookup */}
++      <section className="px-6 py-10">
++        <h2 className="text-2xl font-semibold mb-6 text-center">How does your country score?</h2>
++        <RadarChart />
++      </section>
++    </div>
++  )
++}
++
+diff --git a/src/components/RadarChart.tsx b/src/components/RadarChart.tsx
+new file mode 100644
+--- /dev/null
++++ b/src/components/RadarChart.tsx
+@@
++"use client";
++import { useState } from 'react'
++import { Radar } from 'react-chartjs-2'
++import {
++  Chart as ChartJS,
++  RadialLinearScale,
++  PointElement,
++  LineElement,
++  Filler,
++  Tooltip,
++  Legend,
++} from 'chart.js'
++
++ChartJS.register(RadialLinearScale, PointElement, LineElement, Filler, Tooltip, Legend)
++
++const dataSet: Record<string, number[]> = {
++  Qatar: [70, 65, 60, 55, 75, 50],
++  USA: [85, 78, 70, 68, 80, 60],
++  Estonia: [72, 80, 75, 63, 70, 70],
++}
++
++export default function RadarChart() {
++  const [selected, setSelected] = useState<string>('Qatar')
++
++  const chartData = {
++    labels: ['Governance', 'Citizen', 'Ethics', 'Economic', 'Tech/Data', 'Foresight'],
++    datasets: [
++      {
++        label: selected,
++        data: dataSet[selected],
++        backgroundColor: 'rgba(0,52,89,0.2)',
++        borderColor: 'rgba(0,52,89,0.8)',
++        borderWidth: 1,
++      },
++    ],
++  }
++
++  return (
++    <div className="flex flex-col items-center">
++      <select
++        className="border rounded px-3 py-2 mb-6"
++        value={selected}
++        onChange={(e) => setSelected(e.target.value)}
++      >
++        {Object.keys(dataSet).map((c) => (
++          <option key={c}>{c}</option>
++        ))}
++      </select>
++      <div className="max-w-md w-full">
++        <Radar data={chartData} />
++      </div>
++    </div>
++  )
++}
++
+diff --git a/public/data/sri_2025.csv b/public/data/sri_2025.csv
+new file mode 100644
+--- /dev/null
++++ b/public/data/sri_2025.csv
+@@
++Country,Governance,Citizen,Ethics,Economic,TechData,Foresight
++Qatar,70,65,60,55,75,50
++USA,85,78,70,68,80,60
++Estonia,72,80,75,63,70,70
++

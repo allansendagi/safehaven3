@@ -11,6 +11,9 @@ module.exports = {
         primary: 'var(--primary)',
         secondary: 'var(--secondary)',
         accent: 'var(--accent)',
+        'sh-dark': '#00171F',
+        'sh-accent': '#ADEBFF',
+
       },
       fontFamily: {
         sans: ['var(--font-open-sans)', 'sans-serif'],
