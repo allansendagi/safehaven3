@@ -14,15 +14,16 @@ export default function ClockPage() {
   return (
     <>
       {/* HERO */}
-      <header className="bg-sh-dark text-white text-center h-64 flex flex-col justify-center">
-        <div className="flex justify-center">
+      <header className="bg-sh-dark text-white text-center py-16">
+        <div className="max-w-3xl mx-auto px-4">
           <iframe
             src="/clock/embed/index.html"
-            style={{ border: 'none', width: 550, height: 80 }}
+            style={{ border: 'none', width: '100%', height: '90px', overflow: 'hidden' }}
+            scrolling="no"
             loading="lazy"
           />
+          <p className="mt-4 text-lg">How long we've been rolling the dice.</p>
         </div>
-        <p className="mt-4 text-lg">How long we've been rolling the dice.</p>
       </header>
 
       {/* LATEST INCIDENT */}
@@ -49,19 +50,20 @@ export default function ClockPage() {
       </section>
 
       {/* PILLARS */}
-     <section className="px-6 py-10 bg-gray-50">
-  <h2 className="text-2xl font-semibold mb-6 text-center">SRI Pillars</h2>
+      <section className="px-6 py-10 bg-gray-50">
+        <h2 className="text-2xl font-semibold mb-6 text-center">SRI Pillars</h2>
 
-  <div className="grid gap-4 md:grid-cols-3 lg:grid-cols-6 text-center">
-    {pillars.map(([label, tip]) => (
-      <div key={label} className="pillar group">
-        {label}
-        <span className="tooltip">{tip}</span>
-      </div>
-    ))}
-  </div>
-</section>
+        <div className="grid gap-4 md:grid-cols-3 lg:grid-cols-6 text-center">
+          {pillars.map(([label, tip]) => (
+            <div key={label} className="pillar group">
+              {label}
+              <span className="tooltip">{tip}</span>
+            </div>
+          ))}
+        </div>
+      </section>
 
+      {/* Rest of the components remain unchanged */}
       {/* COUNTRY LOOKUP */}
       <section className="px-6 py-10">
         <h2 className="text-2xl font-semibold mb-6 text-center">How does your country score?</h2>
@@ -105,7 +107,7 @@ export default function ClockPage() {
           readOnly
           className="w-full border rounded p-4 text-xs"
           rows={4}
-          value={`<iframe src="https://safehavenai.world/clock/embed/index.html" style="border:none;width:550px;height:80px" loading="lazy"></iframe>`}
+          value={`<iframe src="https://safehavenai.world/clock/embed/index.html" style="border:none;width:100%;height:90px;overflow:hidden" scrolling="no" loading="lazy"></iframe>`}
         />
       </section>
 

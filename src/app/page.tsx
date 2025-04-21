@@ -19,10 +19,11 @@ export default function Home() {
       {/* Readiness Gap Clock embed */}
       <div className="mt-6 flex justify-center">
   <iframe
-    src="/clock/embed/index.html"
-    style={{ border: 'none', width: 550, height: 80 }}
-    loading="lazy"
-  />
+            src="/clock/embed/index.html"
+            style={{ border: 'none', width: '100%', height: '90px', overflow: 'hidden' }}
+            scrolling="no"
+            loading="lazy"
+          />
 </div>
 
       {/* Mission Section */}
