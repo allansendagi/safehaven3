@@ -8,15 +8,21 @@ const ADMIN_EMAIL = process.env.ADMIN_EMAIL || 'info@safehaven.world';
 const FROM_EMAIL = process.env.FROM_EMAIL || 'no-reply@safehaven.world';
 
 /**
- * Send confirmation email to users after form submission.
+ * Send confirmation email to users after form submission or book purchase.
  * @param email - Recipient email address.
- * @param type - Email type: 'newsletter' or 'contact'.
- * @param data - Optional additional data (e.g. firstName).
+ * @param type - Email type: 'newsletter', 'contact', or 'purchase'.
+ * @param data - Optional additional data for personalization and order details.
  */
 export async function sendConfirmationEmail(
   email: string, 
-  type: 'newsletter' | 'contact',
-  data?: { firstName?: string }
+  type: 'newsletter' | 'contact' | 'purchase',
+  data?: { 
+    firstName?: string;
+    lastName?: string;
+    bookId?: string;
+    format?: string;
+    quantity?: number;
+  }
 ) {
   let subject = '';
   let html = '';
@@ -50,9 +56,22 @@ export async function sendConfirmationEmail(
         </div>
       </div>
     `;
-  }
-
-  if (!subject || !html) {
+  } else if (type === 'purchase') {
+    const firstName = data?.firstName || '';
+    subject = 'Your Book Purchase Confirmation';
+    html = `
+      <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
+        <h2 style="color: #3B82F6;">Thank you for your purchase${firstName ? `, ${firstName}` : ''}!</h2>
+        <p>Here are your order details:</p>
+        <ul>
+          <li><strong>Book ID:</strong> ${data?.bookId}</li>
+          <li><strong>Format:</strong> ${data?.format}</li>
+          <li><strong>Quantity:</strong> ${data?.quantity}</li>
+        </ul>
+        <p>If you have any questions, please contact us at ${ADMIN_EMAIL}.</p>
+      </div>
+    `;
+  } else {
     throw new Error('Invalid email type');
   }
 
@@ -63,8 +82,8 @@ export async function sendConfirmationEmail(
     html,
   });
 
-  if (result.error) {
-    throw new Error(`Failed to send email: ${result.error.message}`);
+  if ((result as any).error) {
+    throw new Error(`Failed to send email: ${(result as any).error.message}`);
   }
 
   return result;
@@ -76,9 +95,9 @@ export async function sendConfirmationEmail(
  */
 export async function sendNotificationEmail({
   type,
-  data
+  data,
 }: {
-  type: 'newsletter' | 'contact';
+  type: 'newsletter' | 'contact' | 'purchase';
   data: any;
 }) {
   let subject = '';
@@ -111,9 +130,21 @@ export async function sendNotificationEmail({
         <p><strong>Date:</strong> ${new Date().toLocaleString()}</p>
       </div>
     `;
-  }
-
-  if (!subject || !html) {
+  } else if (type === 'purchase') {
+    const firstName = data.firstName || '';
+    subject = `New Book Purchase by ${firstName || 'a customer'}`;
+    html = `
+      <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
+        <h2 style="color: #3B82F6;">New Book Purchase</h2>
+        <p><strong>Name:</strong> ${firstName} ${data.lastName || ''}</p>
+        <p><strong>Email:</strong> ${data.email}</p>
+        <p><strong>Book ID:</strong> ${data.bookId}</p>
+        <p><strong>Format:</strong> ${data.format}</p>
+        <p><strong>Quantity:</strong> ${data.quantity}</p>
+        <p><strong>Date:</strong> ${new Date().toLocaleString()}</p>
+      </div>
+    `;
+  } else {
     throw new Error('Invalid notification type');
   }
 
@@ -124,8 +155,8 @@ export async function sendNotificationEmail({
     html,
   });
 
-  if (result.error) {
-    throw new Error(`Failed to send notification: ${result.error.message}`);
+  if ((result as any).error) {
+    throw new Error(`Failed to send notification: ${(result as any).error.message}`);
   }
 
   return result;

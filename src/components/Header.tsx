@@ -36,6 +36,7 @@ const Header = () => {
             <Link href="/initiatives" className="text-gray-700 hover:text-[var(--primary)] font-semibold">Initiatives</Link>
             <Link href="/resources" className="text-gray-700 hover:text-[var(--primary)] font-semibold">Resources</Link>
             <Link href="/book" className="text-gray-700 hover:text-[var(--primary)] font-semibold">Get the Book</Link>
+            <Link href="/books" className="...">Books</Link>
 
           </nav>
           
