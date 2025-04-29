@@ -1,6 +1,6 @@
 // /app/books/[bookId]/page.tsx
 import { getBookById } from '@/app/data/books';
-import BookPage from '@/app/components/BookPage';
+import BookPage from '@/components/BookPage';
 import { notFound } from 'next/navigation';
 
 export async function generateMetadata({ params }: { params: { bookId: string } }) {

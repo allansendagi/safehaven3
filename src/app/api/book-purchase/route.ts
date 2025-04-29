@@ -1,3 +1,4 @@
+// src/app/api/book-purchase/route.ts
 import { NextResponse } from 'next/server';
 import { createPool, createClient } from '@vercel/postgres';
 import { sendConfirmationEmail, sendNotificationEmail } from '@/lib/email';
@@ -23,14 +24,15 @@ export async function POST(request: Request) {
       bookId,
       quantity,
       format,
-      paymentIntentId,
+      paypalOrderId,
+      paypalCaptureId,
       totalAmount
     } = await request.json();
 
     // Validate required fields
-    if (!firstName || !lastName || !email || !bookId || !paymentIntentId) {
+    if (!firstName || !lastName || !email || !bookId || !paypalOrderId || !paypalCaptureId) {
       return NextResponse.json(
-        { error: 'Please fill in all required fields' },
+        { error: 'Please fill in all required fields and complete payment' },
         { status: 400 }
       );
     }
@@ -63,7 +65,8 @@ export async function POST(request: Request) {
           country VARCHAR(100),
           quantity INTEGER NOT NULL DEFAULT 1,
           format VARCHAR(50) NOT NULL,
-          payment_intent_id VARCHAR(255) NOT NULL,
+          paypal_order_id VARCHAR(255) NOT NULL,
+          paypal_capture_id VARCHAR(255) NOT NULL,
           total_amount DECIMAL(10,2) NOT NULL,
           payment_status VARCHAR(50) DEFAULT 'completed',
           purchased_at TIMESTAMP WITH TIME ZONE NOT NULL,
@@ -76,12 +79,12 @@ export async function POST(request: Request) {
       await poolConnection.query(`
         INSERT INTO book_purchases (
           book_id, first_name, last_name, email, address, city, state, postal_code, country,
-          quantity, format, payment_intent_id, total_amount, purchased_at
-        ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, NOW())
+          quantity, format, paypal_order_id, paypal_capture_id, total_amount, purchased_at
+        ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, NOW())
       `, [
         bookId, firstName, lastName, email, address || null, city || null, 
         state || null, postalCode || null, country || null,
-        quantity || 1, format, paymentIntentId, totalAmount
+        quantity || 1, format, paypalOrderId, paypalCaptureId, totalAmount
       ]);
       
     } else {
@@ -110,7 +113,8 @@ export async function POST(request: Request) {
           country VARCHAR(100),
           quantity INTEGER NOT NULL DEFAULT 1,
           format VARCHAR(50) NOT NULL,
-          payment_intent_id VARCHAR(255) NOT NULL,
+          paypal_order_id VARCHAR(255) NOT NULL,
+          paypal_capture_id VARCHAR(255) NOT NULL,
           total_amount DECIMAL(10,2) NOT NULL,
           payment_status VARCHAR(50) DEFAULT 'completed',
           purchased_at TIMESTAMP WITH TIME ZONE NOT NULL,
@@ -123,12 +127,12 @@ export async function POST(request: Request) {
       await clientConnection.query(`
         INSERT INTO book_purchases (
           book_id, first_name, last_name, email, address, city, state, postal_code, country,
-          quantity, format, payment_intent_id, total_amount, purchased_at
-        ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, NOW())
+          quantity, format, paypal_order_id, paypal_capture_id, total_amount, purchased_at
+        ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, NOW())
       `, [
         bookId, firstName, lastName, email, address || null, city || null, 
         state || null, postalCode || null, country || null,
-        quantity || 1, format, paymentIntentId, totalAmount
+        quantity || 1, format, paypalOrderId, paypalCaptureId, totalAmount
       ]);
     }
 
@@ -138,7 +142,8 @@ export async function POST(request: Request) {
         firstName,
         bookId,
         format,
-        quantity
+        quantity,
+        orderId: paypalOrderId
       });
     } catch (emailError) {
       console.error('Failed to send confirmation email:', emailError);
@@ -161,6 +166,7 @@ export async function POST(request: Request) {
           format,
           quantity,
           totalAmount,
+          paypalOrderId,
           subject: 'New Book Purchase',
           message: `New book purchase from ${firstName} ${lastName} (${email}) for book ID: ${bookId}, format: ${format}, quantity: ${quantity || 1}`
         }
@@ -172,7 +178,7 @@ export async function POST(request: Request) {
     return NextResponse.json(
       { 
         message: 'Thank you for your purchase! We\'ll send you a confirmation email with details.',
-        orderId: paymentIntentId
+        orderId: paypalOrderId
       },
       { status: 201 }
     );
