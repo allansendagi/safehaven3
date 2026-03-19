@@ -31,7 +31,7 @@ const Hero = () => {
         {/* Global impact visualization */}
         <div className="mt-12 max-w-3xl mx-auto bg-white/10 p-8 rounded-2xl backdrop-blur-sm border border-white/10">
           <h3 className="text-2xl font-semibold mb-2">Global AI Readiness Index</h3>
-          <GlobalReadinessVisualization />
+          <GlobalReadinessVisualization darkMode />
         </div>
       </div>
       

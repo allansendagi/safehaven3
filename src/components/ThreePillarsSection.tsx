@@ -8,6 +8,7 @@ const ThreePillarsSection = () => {
       tagline: 'Dialogue & Participatory Governance',
       description: 'A global platform bridging AI advancement and societal readiness through education, dialogue, and collaborative decision-making.',
       link: '/ai-townsquare',
+      externalLink: 'https://aitownsquare.org',
       icon: (
         <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
@@ -39,37 +40,42 @@ const ThreePillarsSection = () => {
   ];
 
   return (
-    <section className="py-20 bg-gray-50">
-      <div className="container-wide">
-        <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold text-[var(--primary)] mb-4">
+    <section className="py-16 md:py-24 bg-gray-50">
+      <div className="container-wide px-4 md:px-6">
+        {/* Section header with civic OS messaging */}
+        <div className="text-center mb-12 md:mb-16">
+          <p className="text-[var(--accent)] font-semibold text-sm md:text-base uppercase tracking-wide mb-3">
+            The Civic Operating System for the Intelligence Age
+          </p>
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-[var(--primary)] mb-4">
             Three Pillars of Societal Readiness
           </h2>
-          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-            SafeHaven operates through three interconnected initiatives designed to prepare humanity for the age of AI.
+          <p className="text-base md:text-lg text-gray-600 max-w-2xl mx-auto leading-relaxed">
+            SafeHaven operates through three interconnected initiatives designed to prepare humanity for the age of AI — at scale.
           </p>
         </div>
 
-        <div className="grid md:grid-cols-3 gap-8">
+        {/* Pillar cards */}
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
           {pillars.map((pillar, index) => (
             <Link
               key={index}
               href={pillar.link}
-              className="group bg-white rounded-xl p-8 shadow-md hover:shadow-xl transition-all duration-300 border border-gray-100 hover:border-[var(--primary)]"
+              className="group bg-white rounded-2xl p-6 md:p-8 shadow-sm hover:shadow-xl transition-all duration-300 border border-gray-100 hover:border-[var(--primary)] hover:-translate-y-1"
             >
-              <div className="h-16 w-16 bg-[var(--primary)] bg-opacity-10 rounded-full flex items-center justify-center mb-6 text-[var(--primary)] group-hover:bg-[var(--primary)] group-hover:text-white transition-all duration-300">
+              <div className="h-14 w-14 md:h-16 md:w-16 bg-[var(--primary)] bg-opacity-10 rounded-xl flex items-center justify-center mb-5 md:mb-6 text-[var(--primary)] group-hover:bg-[var(--primary)] group-hover:text-white transition-all duration-300">
                 {pillar.icon}
               </div>
-              <h3 className="text-xl font-bold text-[var(--primary)] mb-2">
+              <h3 className="text-xl md:text-2xl font-bold text-[var(--primary)] mb-2">
                 {pillar.title}
               </h3>
-              <p className="text-[var(--accent)] font-semibold text-sm mb-4">
+              <p className="text-[var(--accent)] font-semibold text-sm mb-3 md:mb-4">
                 {pillar.tagline}
               </p>
-              <p className="text-gray-600 mb-6">
+              <p className="text-gray-600 text-sm md:text-base mb-5 md:mb-6 leading-relaxed">
                 {pillar.description}
               </p>
-              <span className="inline-flex items-center text-[var(--primary)] font-semibold group-hover:underline">
+              <span className="inline-flex items-center text-[var(--primary)] font-semibold text-sm md:text-base group-hover:underline">
                 Learn more
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 ml-2 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
@@ -77,6 +83,21 @@ const ThreePillarsSection = () => {
               </span>
             </Link>
           ))}
+        </div>
+
+        {/* External link to AI TownSquare */}
+        <div className="mt-10 md:mt-12 text-center">
+          <a
+            href="https://aitownsquare.org"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center text-[var(--primary)] hover:text-[var(--accent)] font-medium transition-colors"
+          >
+            <span>Visit AI TownSquare Global</span>
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+            </svg>
+          </a>
         </div>
       </div>
     </section>
