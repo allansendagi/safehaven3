@@ -16,8 +16,7 @@ const Hero = () => {
         </h1>
         
         <p className="text-xl md:text-2xl max-w-3xl mx-auto mb-10 animate-fade-in">
-        SafeHaven is the civic operating system for the Intelligence Age — built on three pillars: AI TownSquare, the Societal Readiness Index, and the Readiness Institute.
-
+          AI advances exponentially. Society adapts linearly. SafeHaven closes this gap through dialogue, measurement, and implementation.
         </p>
         
         <div className="flex flex-col sm:flex-row gap-4 justify-center animate-slide-up">

@@ -13,7 +13,7 @@ export default function AITownSquarePage() {
               AI TownSquare
             </h1>
             <p className="text-xl mb-8 animate-fade-in">
-              The mission is to bridge the gap betweeen AI's advancement and societal readiness.
+              The mission is to bridge the gap between AI's advancement and societal readiness.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center animate-slide-up">
               <Link href="#upcoming-events" className="btn-accent">

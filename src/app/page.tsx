@@ -3,12 +3,7 @@ import Image from 'next/image'
 
 /* Component imports */
 import Hero from '@/components/Hero'
-import MissionSection from '@/components/MissionSection'
-import ChallengeSection from '@/components/ChallengeSection'
-import ApproachSection from '@/components/ApproachSection'
-import GlobalInitiatives from '@/components/GlobalInitiatives'
-import ReadinessIndex from '@/components/ReadinessIndex'
-import CallToAction from '@/components/CallToAction'
+import ThreePillarsSection from '@/components/ThreePillarsSection'
 
 export default function Home() {
   return (
@@ -26,23 +21,37 @@ export default function Home() {
           />
 </div>
 
-      {/* Mission Section */}
-      <MissionSection />
+      {/* Three Pillars Section */}
+      <ThreePillarsSection />
 
-      {/* The Challenge Section */}
-      <ChallengeSection />
-
-      {/* Our Approach Section */}
-      <ApproachSection />
-
-      {/* Global Initiatives Section */}
-      <GlobalInitiatives />
-
-      {/* Societal Readiness Index Section */}
-      <ReadinessIndex />
-
-      {/* Call to Action Section */}
-      <CallToAction />
+      {/* Call to Action - Newsletter Focus */}
+      <section className="py-20 bg-gradient-to-r from-[var(--primary)] to-[#2c4c7c] text-white">
+        <div className="container-wide">
+          <div className="max-w-2xl mx-auto text-center">
+            <h2 className="text-3xl md:text-4xl font-bold mb-6">Stay Informed</h2>
+            <p className="text-xl mb-8 text-white/90">
+              Subscribe to our newsletter for updates on AI developments, SafeHaven initiatives, and opportunities to get involved.
+            </p>
+            <div className="bg-white/5 backdrop-blur-sm rounded-lg p-8">
+              <div className="flex flex-col sm:flex-row gap-3">
+                <input
+                  type="email"
+                  placeholder="Your email address"
+                  className="flex-grow px-4 py-3 rounded-md bg-white/10 border border-white/20 text-white placeholder-white/60 focus:outline-none focus:ring-2 focus:ring-white/50"
+                />
+                <button className="btn-accent py-3">
+                  Subscribe
+                </button>
+              </div>
+            </div>
+            <div className="mt-8">
+              <Link href="/join" className="btn-accent text-lg px-8 py-4">
+                Get Involved
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
     </main>
   )
 }
