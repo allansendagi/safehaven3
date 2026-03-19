@@ -16,12 +16,13 @@ const FROM_EMAIL = process.env.FROM_EMAIL || 'no-reply@safehaven.world';
 export async function sendConfirmationEmail(
   email: string, 
   type: 'newsletter' | 'contact' | 'purchase',
-  data?: { 
+  data?: {
     firstName?: string;
     lastName?: string;
     bookId?: string;
     format?: string;
     quantity?: number;
+    orderId?: string;
   }
 ) {
   let subject = '';
