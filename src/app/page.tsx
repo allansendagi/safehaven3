@@ -11,15 +11,21 @@ export default function Home() {
       {/* Hero Section */}
       <Hero />
 
-      {/* Readiness Gap Clock embed */}
-      <div className="mt-6 flex justify-center">
-  <iframe
-            src="/clock/embed/index.html"
-            style={{ border: 'none', width: '100%', height: '90px', overflow: 'hidden' }}
-            scrolling="no"
-            loading="lazy"
-          />
-</div>
+      {/* YouTube Video */}
+      <div className="py-12 bg-gray-50">
+        <div className="container-wide">
+          <div className="relative pb-[56.25%] h-0 overflow-hidden max-w-4xl mx-auto rounded-xl shadow-lg">
+            <iframe
+              className="absolute top-0 left-0 w-full h-full"
+              src="https://www.youtube.com/embed/DfFzAlDSeUY"
+              title="Preparing Civilisation for the Advent of AI and Superintelligence"
+              frameBorder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+            />
+          </div>
+        </div>
+      </div>
 
       {/* Three Pillars Section */}
       <ThreePillarsSection />
