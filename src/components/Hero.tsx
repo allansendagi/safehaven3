@@ -5,7 +5,7 @@ import GlobalReadinessVisualization from './GlobalReadinessVisualization';
 
 const Hero = () => {
   return (
-    <section className="relative h-screen flex items-center justify-center overflow-hidden">
+    <section className="relative min-h-screen flex items-center justify-center py-20 overflow-hidden">
       {/* Background gradient */}
       <div className="absolute inset-0 bg-gradient-to-r from-[#1a365d] to-[#2c4c7c] opacity-90"></div>
       
@@ -29,11 +29,9 @@ const Hero = () => {
         </div>
         
         {/* Global impact visualization */}
-        <div className="mt-16 max-w-4xl mx-auto bg-white/10 p-6 rounded-lg backdrop-blur-sm">
-          <h3 className="text-xl mb-4">Global AI Readiness Index</h3>
-          <div className="h-[200px] bg-white/5 rounded">
-            <GlobalReadinessVisualization />
-          </div>
+        <div className="mt-12 max-w-3xl mx-auto bg-white/10 p-8 rounded-2xl backdrop-blur-sm border border-white/10">
+          <h3 className="text-2xl font-semibold mb-2">Global AI Readiness Index</h3>
+          <GlobalReadinessVisualization />
         </div>
       </div>
       
