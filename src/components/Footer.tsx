@@ -49,8 +49,7 @@ const Footer = () => {
             <ul className="space-y-2 text-sm">
               <li><a href="https://aitownsquare.org" target="_blank" rel="noopener noreferrer" className="text-white/80 hover:text-white transition-colors">AI TownSquare Global</a></li>
               <li><Link href="/readiness/white-paper" className="text-white/80 hover:text-white transition-colors">SRI White Paper</Link></li>
-              <li><Link href="/challenge" className="text-white/80 hover:text-white transition-colors">The Challenge</Link></li>
-              <li><Link href="/approach" className="text-white/80 hover:text-white transition-colors">Our Approach</Link></li>
+              <li><Link href="/book" className="text-white/80 hover:text-white transition-colors">The Book</Link></li>
             </ul>
           </div>
 

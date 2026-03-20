@@ -20,10 +20,10 @@ const Hero = () => {
         </p>
         
         <div className="flex flex-col sm:flex-row gap-4 justify-center animate-slide-up">
-          <Link href="/readiness" className="btn-accent">
+          <Link href="/readiness" className="bg-white text-[var(--primary)] font-semibold px-6 py-3 rounded-lg hover:bg-gray-100 transition-colors">
             Assess Your Readiness
           </Link>
-          <Link href="https://www.aitownsquare.org/dubai/" className="btn-outline border-white text-white hover:bg-white hover:text-[#1a365d]" target="_blank" rel="noopener noreferrer">
+          <Link href="https://www.aitownsquare.org/dubai/" className="bg-[var(--accent)] text-[var(--primary)] font-semibold px-6 py-3 rounded-lg hover:bg-[#e6b84d] transition-colors" target="_blank" rel="noopener noreferrer">
             AI TownSquare Dubai
           </Link>
         </div>
