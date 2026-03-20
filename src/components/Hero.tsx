@@ -23,8 +23,8 @@ const Hero = () => {
           <Link href="/readiness" className="btn-accent">
             Assess Your Readiness
           </Link>
-          <Link href="/about" className="btn-outline border-white text-white hover:bg-white hover:text-[#1a365d]">
-            Explore the Pillars
+          <Link href="https://www.aitownsquare.org/dubai/" className="btn-outline border-white text-white hover:bg-white hover:text-[#1a365d]" target="_blank" rel="noopener noreferrer">
+            AI TownSquare Dubai
           </Link>
         </div>
         

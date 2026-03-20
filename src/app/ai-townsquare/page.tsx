@@ -1,6 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
-import Image from 'next/image';
+import NewsletterSignup from '@/components/NewsletterSignup';
 
 export default function AITownSquarePage() {
   return (
@@ -90,11 +90,33 @@ export default function AITownSquarePage() {
           <h2 className="section-title mb-12">Upcoming Events</h2>
           
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {/* Featured: AI TownSquare Dubai */}
+            <div className="card border-2 border-[var(--accent)] relative">
+              <div className="absolute -top-3 left-4 bg-[var(--accent)] text-[var(--primary)] text-xs font-bold px-3 py-1 rounded-full">
+                FEATURED EVENT
+              </div>
+              <div className="bg-[var(--primary)] text-white text-sm font-bold px-3 py-1 rounded-full inline-block mb-4 mt-2">
+                AI TOWNSQUARE DUBAI
+              </div>
+              <h3 className="text-xl font-semibold mb-2">AI TownSquare Dubai</h3>
+              <p className="text-gray-600 mb-4">
+                Join global leaders, innovators, and policymakers in Dubai for a groundbreaking dialogue on AI governance, ethics, and societal readiness. Be part of shaping the future of AI in the Middle East and beyond.
+              </p>
+              <div className="flex items-center text-gray-500 mb-6">
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                </svg>
+                <span>2025 • Dubai, UAE</span>
+              </div>
+              <Link href="https://www.aitownsquare.org/dubai/" className="btn-primary w-full text-center" target="_blank" rel="noopener noreferrer">
+                Learn More & Register
+              </Link>
+            </div>
             <div className="card">
               <div className="bg-[var(--primary)] text-white text-sm font-bold px-3 py-1 rounded-full inline-block mb-4">
                 AI TOWNSQUARE HEALTHCARE
               </div>
-              <h3 className="text-xl font-semibold mb-2">The World’s First Healthcare AI TownSquare</h3>
+              <h3 className="text-xl font-semibold mb-2">The World&apos;s First Healthcare AI TownSquare</h3>
               <p className="text-gray-600 mb-4">
                 Discover how to develop AI-powered clinical assistants that healthcare professionals trust—solutions already deployed by Pfizer, Sanofi, and government health departments worldwide.
               </p>
@@ -104,7 +126,7 @@ export default function AITownSquarePage() {
                 </svg>
                 <span>2025 • Date to be Announced • Doha</span>
               </div>
-              <Link href="https://aitownsquaredoha.scoreapp.com/" className="btn-outline w-full text-center">
+              <Link href="https://aitownsquaredoha.scoreapp.com/" className="btn-outline w-full text-center" target="_blank" rel="noopener noreferrer">
                 Register Your Interest
               </Link>
             </div>
@@ -120,10 +142,10 @@ export default function AITownSquarePage() {
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
                 </svg>
-                <span>April 15, 2025 • 10:00 AM - 12:00 PM UTC</span>
+                <span>Coming Soon</span>
               </div>
-              <Link href="#" className="btn-outline w-full text-center">
-                Register (Coming Soon)
+              <Link href="/join" className="btn-outline w-full text-center">
+                Register Interest
               </Link>
             </div>
             
@@ -141,11 +163,11 @@ export default function AITownSquarePage() {
                 </svg>
                 <span>May 3, 2025 • 2:00 PM - 5:00 PM UTC</span>
               </div>
-              <Link href="#" className="btn-outline w-full text-center">
-                Register (Coming Soon)
+              <Link href="/join" className="btn-outline w-full text-center">
+                Register Interest
               </Link>
             </div>
-            
+
             <div className="card">
               <div className="bg-[var(--accent)] text-[var(--primary)] text-sm font-bold px-3 py-1 rounded-full inline-block mb-4">
                 CONFERENCE
@@ -160,15 +182,15 @@ export default function AITownSquarePage() {
                 </svg>
                 <span>September 21-23, 2025 • New York City</span>
               </div>
-              <Link href="#" className="btn-outline w-full text-center">
-                Register (Coming Soon)
+              <Link href="/join" className="btn-outline w-full text-center">
+                Register Interest
               </Link>
             </div>
           </div>
-          
+
           <div className="text-center mt-12">
-            <Link href="#" className="btn-primary">
-              View All Events
+            <Link href="https://aitownsquare.org" target="_blank" rel="noopener noreferrer" className="btn-primary">
+              Visit AI TownSquare Global
             </Link>
           </div>
         </div>
@@ -195,11 +217,11 @@ export default function AITownSquarePage() {
               <p className="text-gray-600 mb-6">
                 Participate in structured discussions on key topics related to AI governance, ethics, and societal impact.
               </p>
-              <Link href="#" className="btn-outline">
+              <Link href="https://aitownsquare.org" target="_blank" rel="noopener noreferrer" className="btn-outline">
                 Browse Forums
               </Link>
             </div>
-            
+
             <div className="bg-gray-50 rounded-lg p-8 text-center">
               <div className="h-16 w-16 bg-[var(--primary)] bg-opacity-10 rounded-full flex items-center justify-center mx-auto mb-6">
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-[var(--primary)]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -210,11 +232,11 @@ export default function AITownSquarePage() {
               <p className="text-gray-600 mb-6">
                 Join specialized working groups focused on developing policy recommendations for specific AI challenges.
               </p>
-              <Link href="#" className="btn-outline">
-                Explore Groups
+              <Link href="/join" className="btn-outline">
+                Get Involved
               </Link>
             </div>
-            
+
             <div className="bg-gray-50 rounded-lg p-8 text-center">
               <div className="h-16 w-16 bg-[var(--primary)] bg-opacity-10 rounded-full flex items-center justify-center mx-auto mb-6">
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-[var(--primary)]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -225,7 +247,7 @@ export default function AITownSquarePage() {
               <p className="text-gray-600 mb-6">
                 Access courses, workshops, and materials designed to build AI literacy and understanding.
               </p>
-              <Link href="#" className="btn-outline">
+              <Link href="/readiness-institute" className="btn-outline">
                 Browse Resources
               </Link>
             </div>
@@ -236,26 +258,8 @@ export default function AITownSquarePage() {
       {/* Newsletter Signup */}
       <section className="py-16 bg-[var(--primary)] bg-opacity-5">
         <div className="container-wide">
-          <div className="max-w-3xl mx-auto text-center">
-            <h2 className="text-3xl font-bold text-[var(--primary)] mb-4">Stay Connected</h2>
-            <p className="text-lg text-gray-700 mb-8">
-              Subscribe to The Readiness Institute newsletter to receive updates on AI TownSquare events, resources, and opportunities to participate.
-            </p>
-            
-            <form className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
-              <input 
-                type="email" 
-                placeholder="Your email address" 
-                className="flex-grow px-4 py-3 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[var(--primary)]"
-                required
-              />
-              <button 
-                type="submit" 
-                className="btn-primary whitespace-nowrap"
-              >
-                Subscribe
-              </button>
-            </form>
+          <div className="max-w-3xl mx-auto">
+            <NewsletterSignup />
           </div>
         </div>
       </section>

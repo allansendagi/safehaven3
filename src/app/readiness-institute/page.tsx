@@ -267,7 +267,7 @@ export default function ReadinessInstitutePage() {
         </div>
         
         <div className="text-center">
-          <Link href="/contact" className="btn-primary">
+          <Link href="/join" className="btn-primary">
             Partner with the Readiness Institute
           </Link>
         </div>
