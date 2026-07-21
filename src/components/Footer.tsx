@@ -36,6 +36,7 @@ const Footer = () => {
             <h3 className="text-lg font-semibold mb-4">Quick Links</h3>
             <ul className="space-y-2 text-sm">
               <li><Link href="/ai-townsquare" className="text-white/80 hover:text-white transition-colors">AI TownSquare</Link></li>
+              <li><Link href="/nomos-protocol" className="text-white/80 hover:text-white transition-colors">Nomos Protocol</Link></li>
               <li><Link href="/readiness" className="text-white/80 hover:text-white transition-colors">Readiness Index</Link></li>
               <li><Link href="/readiness-institute" className="text-white/80 hover:text-white transition-colors">Readiness Institute</Link></li>
               <li><Link href="/book" className="text-white/80 hover:text-white transition-colors">The Book</Link></li>
@@ -48,6 +49,7 @@ const Footer = () => {
             <h3 className="text-lg font-semibold mb-4">Initiatives</h3>
             <ul className="space-y-2 text-sm">
               <li><a href="https://aitownsquare.org" target="_blank" rel="noopener noreferrer" className="text-white/80 hover:text-white transition-colors">AI TownSquare Global</a></li>
+              <li><a href="https://www.nomosprotocol.com" target="_blank" rel="noopener noreferrer" className="text-white/80 hover:text-white transition-colors">Nomos Protocol</a></li>
               <li><Link href="/readiness/white-paper" className="text-white/80 hover:text-white transition-colors">SRI White Paper</Link></li>
               <li><Link href="/book" className="text-white/80 hover:text-white transition-colors">The Book</Link></li>
             </ul>

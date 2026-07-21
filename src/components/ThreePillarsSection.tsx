@@ -16,6 +16,18 @@ const ThreePillarsSection = () => {
       ),
     },
     {
+      title: 'Nomos Protocol',
+      tagline: 'AI Governance Infrastructure',
+      description: 'Cryptographically sealed governance artifacts that let regulated organizations prove their AI systems make decisions consistently, accountably, and in line with policy.',
+      link: '/nomos-protocol',
+      externalLink: 'https://www.nomosprotocol.com',
+      icon: (
+        <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+        </svg>
+      ),
+    },
+    {
       title: 'Societal Readiness Index',
       tagline: "Measuring Society's AI Preparedness",
       description: 'A comprehensive framework to assess and track how prepared nations, organizations, and communities are for AI integration.',
@@ -48,15 +60,15 @@ const ThreePillarsSection = () => {
             The Civic Operating System for the Intelligence Age
           </p>
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-[var(--primary)] mb-4">
-            Three Pillars of Societal Readiness
+            SafeHaven&apos;s Ventures &amp; Pillars
           </h2>
           <p className="text-base md:text-lg text-gray-600 max-w-2xl mx-auto leading-relaxed">
-            SafeHaven operates through three interconnected initiatives designed to prepare humanity for the age of AI — at scale.
+            SafeHaven operates through interconnected ventures and initiatives designed to prepare humanity for the age of AI — at scale.
           </p>
         </div>
 
         {/* Pillar cards */}
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+        <div className="grid sm:grid-cols-2 gap-6 md:gap-8">
           {pillars.map((pillar, index) => (
             <Link
               key={index}
@@ -85,8 +97,8 @@ const ThreePillarsSection = () => {
           ))}
         </div>
 
-        {/* External link to AI TownSquare */}
-        <div className="mt-10 md:mt-12 text-center">
+        {/* External links to venture sites */}
+        <div className="mt-10 md:mt-12 flex flex-col sm:flex-row gap-4 sm:gap-8 justify-center items-center">
           <a
             href="https://aitownsquare.org"
             target="_blank"
@@ -94,6 +106,17 @@ const ThreePillarsSection = () => {
             className="inline-flex items-center text-[var(--primary)] hover:text-[var(--accent)] font-medium transition-colors"
           >
             <span>Visit AI TownSquare Global</span>
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+            </svg>
+          </a>
+          <a
+            href="https://www.nomosprotocol.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center text-[var(--primary)] hover:text-[var(--accent)] font-medium transition-colors"
+          >
+            <span>Visit Nomos Protocol</span>
             <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
             </svg>
