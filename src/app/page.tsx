@@ -4,7 +4,7 @@ import GapSection from '@/components/GapSection'
 import WhyItMattersSection from '@/components/WhyItMattersSection'
 import ThreePillarsSection from '@/components/ThreePillarsSection'
 import VisionSection from '@/components/VisionSection'
-import BookSection from '@/components/BookSection'
+// import BookSection from '@/components/BookSection' // hidden for now, not deleted
 import FinalCTASection from '@/components/FinalCTASection'
 
 export default function Home() {
@@ -25,8 +25,8 @@ export default function Home() {
       {/* 06 — Our Vision */}
       <VisionSection />
 
-      {/* 07 — The Book */}
-      <BookSection />
+      {/* 07 — The Book — hidden for now, not deleted */}
+      {/* <BookSection /> */}
 
       {/* 08 — Get Involved */}
       <FinalCTASection />

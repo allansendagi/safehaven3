@@ -27,7 +27,7 @@ const Header = () => {
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center space-x-4">
             <Link href="/ai-townsquare" className="text-gray-700 hover:text-[var(--primary)] font-semibold">AI TownSquare</Link>
-            <Link href="/nomos-protocol" className="text-gray-700 hover:text-[var(--primary)] font-semibold">Nomos Protocol</Link>
+            <Link href="/nomos-protocol" className="text-gray-700 hover:text-[var(--primary)] font-semibold">NOMOS</Link>
             <Link href="/readiness" className="text-gray-700 hover:text-[var(--primary)] font-semibold">Readiness Index</Link>
             <Link href="/readiness-institute" className="text-gray-700 hover:text-[var(--primary)] font-semibold">Readiness Institute</Link>
             <Link href="/book" className="text-gray-700 hover:text-[var(--primary)] font-semibold">The Book</Link>
@@ -58,7 +58,7 @@ const Header = () => {
           <nav className="md:hidden mt-4 pb-4">
             <div className="flex flex-col space-y-4">
               <Link href="/ai-townsquare" className="text-gray-700 hover:text-[var(--primary)] font-semibold">AI TownSquare</Link>
-              <Link href="/nomos-protocol" className="text-gray-700 hover:text-[var(--primary)] font-semibold">Nomos Protocol</Link>
+              <Link href="/nomos-protocol" className="text-gray-700 hover:text-[var(--primary)] font-semibold">NOMOS</Link>
               <Link href="/readiness" className="text-gray-700 hover:text-[var(--primary)] font-semibold">Readiness Index</Link>
               <Link href="/readiness-institute" className="text-gray-700 hover:text-[var(--primary)] font-semibold">Readiness Institute</Link>
               <Link href="/book" className="text-gray-700 hover:text-[var(--primary)] font-semibold">The Book</Link>
