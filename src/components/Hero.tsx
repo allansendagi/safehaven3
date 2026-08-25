@@ -31,8 +31,8 @@ const Hero = () => {
         </div>
 
         {/* Video */}
-        <div className="mt-12 max-w-3xl mx-auto bg-white/10 p-4 md:p-6 rounded-2xl backdrop-blur-sm">
-          <div className="relative pb-[56.25%] h-0 overflow-hidden rounded-xl">
+        <div className="mt-12 max-w-3xl mx-auto">
+          <div className="relative pb-[56.25%] h-0 overflow-hidden rounded-2xl">
             <iframe
               className="absolute top-0 left-0 w-full h-full"
               src="https://www.youtube.com/embed/DfFzAlDSeUY"
