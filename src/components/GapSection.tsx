@@ -9,15 +9,8 @@ const GapSection = () => {
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-[var(--primary)] mb-6">
             The AI Readiness Gap
           </h2>
-          <p className="text-lg md:text-xl text-gray-600 leading-relaxed mb-8">
-            AI capability is accelerating faster than the systems around it can adapt.
-          </p>
-          <div className="space-y-2 text-base md:text-lg text-gray-700 font-medium">
-            <p>Technology changes exponentially.</p>
-            <p>Institutions, policies, skills, norms, and public understanding change more slowly.</p>
-          </div>
-          <p className="text-lg md:text-xl text-[var(--primary)] font-semibold mt-6">
-            The result is a growing readiness gap.
+          <p className="text-lg md:text-xl text-gray-600 leading-relaxed">
+            AI capability is accelerating faster than the institutions, policies, and skills meant to keep pace with it.
           </p>
         </div>
 
