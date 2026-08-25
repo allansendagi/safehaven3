@@ -20,7 +20,7 @@ const Header = () => {
               alt="Safehaven Logo"
               width={100}
               height={40}
-              className="w-18 md:w-30 h-auto"
+              className="w-24 md:w-32 h-auto"
             />
           </Link>
 
