@@ -14,7 +14,7 @@ const Hero = () => {
         </h1>
 
         <p className="text-xl md:text-2xl max-w-3xl mx-auto mb-4 animate-fade-in">
-          AI advances exponentially. Human systems adapt more slowly. SafeHaven builds the infrastructure that helps civilization close the gap.
+          AI advances exponentially. Human systems adapt linearly. SafeHaven builds the infrastructure that helps civilization close the gap.
         </p>
 
         <p className="text-base md:text-lg font-semibold text-[var(--accent)] mb-10 tracking-wide animate-fade-in">
